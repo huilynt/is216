@@ -39,6 +39,7 @@
     <label for="city">Enter the name of a city.</label>
     
     <!-- TODO: add a text input field with the attribute 'id' = city -->
+    <input type="text" name="city" id="city">
 
     <button type="button" onclick="getWeather()">Submit</button>
     
@@ -50,7 +51,7 @@
             var city = document.getElementById("city").value
             console.log(city)
             var data = "Feeling Good!"
-            var myapikey = "YOUR OWN API KEY"  // TODO: add your API KEY here
+            var myapikey = "2ac566dbc98f57a640544d4548b1c9db"  // TODO: add your API KEY here
             var url = "https://api.openweathermap.org/data/2.5/weather"
             
             // get weather json data

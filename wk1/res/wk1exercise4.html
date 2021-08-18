@@ -17,10 +17,10 @@
 // Initialize and add the map
 function initMap() {
   // The location of Uluru
-  var uluru = {lat: -25.344, lng: 131.036};
+  var uluru = {lat: 1.297538, lng: 103.849558};
   // The map, centered at Uluru
   var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
+      document.getElementById('map'), {zoom: 100, center: uluru});
   // The marker, positioned at Uluru
   var marker = new google.maps.Marker({position: uluru, map: map});
 }
@@ -31,7 +31,7 @@ function initMap() {
     * The callback parameter executes the initMap() function, i.e., the initMap() function is executed as soon as the API is loaded.
     -->
     <script defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh3KACE6lIrQ3LybwH_r-didxJZVBDYV4&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSpo0xozQ3pjD3bD9DMXJMRM3N8_bmEMw&callback=initMap">
     </script>
   </body>
 </html>
