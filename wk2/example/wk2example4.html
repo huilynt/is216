@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            p {
+                color: blue;
+                text-align: center;
+            }
+
+            /* 
+            Consider this: what if we add 
+                color: red; 
+            into the following rule?
+            */
+            #emphasis {
+                font-style: italic;
+            }
+
+        </style>
+    </head>
+    <body>
+        
+        <p>This is a text centered and in blue.</p>
+
+        <p id="emphasis">This is a unique paragraph that deserves an emphasis.</p>
+        <!-- This following has the same ID. Is it a problem? -->
+        <p id="emphasis">This is a unique paragraph that deserves an emphasis.</p>
+      
+    </body>
+</html>

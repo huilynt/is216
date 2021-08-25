@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            p {
+                color: blue;
+                text-align: left;
+            }
+
+            .normal {
+            /* this color overrides the general p property above */
+                color: black;
+            }
+
+            .center {
+                text-align: center;
+            }
+
+        </style>
+    </head>
+    <body>
+        
+        <p>This is a text aligned-left and in blue.</p>
+
+        <p class="normal">This is a paragraph that shares the style properties with the following paragraph.</p>
+
+        <p class="normal">This is a paragraph that shares the style properties with the paragraph above.</p>
+      
+        <!-- this <p> element refers to multiple classes-->
+        <p class="normal center">This is also a normal paragraph but is centered.</p>
+
+    </body>
+</html>

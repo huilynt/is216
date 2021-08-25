@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!--
+        1. CSS: a set of rules of the form: selector { property : value; }  
+            - note: do not omit ';' 
+        2. Three ways of CSS: inline, internal, external
+            inline: <p style="text-align:center;">
+            internal: <style> p { text-align:center; } </style>
+            external (*.css file): p { text-align:center; }
+        3. Comment: /* ... */ 
+        4. Selectors
+            Element: p, h1, img, a, button, etc.
+            id: #unique-name
+            class: .class-name  (an element can belong to multiple classes)
+        
+        5. Unit of Measurement: Absolute Unit, Relative Unit
+            Absolute: px, in, cm
+            Relative: %, em, vw
+        6. Color: rgba(50, 180, 39, 1) /* red, green, blue, alpha */
+        7. Display: inline, block, none
+        8. Box Model: content, padding, border, margin
+            - every HTML element is a box
+        9. Positioning element: static, absolute, fixed, relative, sticky
+        10. Styling Forms: input[type=text] { ... }
+        11. Pseudo class: define a state of an element
+            - Syntax: selector:pseudo-classs { property : value; } 
+    -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS</title>
+
+  <style>
+        /* here there is a conflict! */
+
+        /* element selector */
+        div {
+            color: blue;
+            background-color: gray;
+        }
+
+        #unique {
+            margin-bottom: 10px;
+            position: sticky;
+            top:0px;
+        }
+
+        .normal {
+            font-size: 1.2em; /* em : specifies the size wrt default font size 16px */
+            margin-bottom: 10px;
+            width: 400px;
+        }
+
+        .emphasis {
+            font-style: italic;
+            padding: 30px 10px 50px 50px; /* top right bottom left */
+            margin: 30px 10px; /* top/bottom left/right */
+            
+            
+        }
+
+        table, th, td {
+            border: 1px dotted darkblue;
+            border-collapse: collapse;
+        }
+        /* pseudo-class changes style according to the state of the element
+        tr:hover {
+            color: green;
+        }
+        /* unvisited link */
+        a:link { color: red; }
+        /* visited link */
+        a:visited { color: green; }
+        /* mouse over link */
+        a:hover { color: hotpink; }
+        /* selected link */
+        a:active { color: blue; }
+
+        img {
+            width: 200px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+        }
+  
+  </style>
+
+</head>
+<body>
+
+    <!-- inline styling effect only the particular element-->
+    <!-- inline vs internal : inline wins -->
+    <div id="unique" style="color:rgb(138, 10, 40);text-align:center;background-color:rgb(204, 55, 55);">This is a paragraph.</div>
+
+    <div class="normal">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis ea enim delectus facere accusantium atque voluptas maiores saepe laboriosam, ab soluta. Ducimus fugit est nisi nesciunt id rem explicabo expedita.</div>
+
+
+    <img src="../res/img/naruto2.jpg" alt="" style="z-index: 1;width:90px;">
+    <img src="../res/img/naruto1.jpg" alt="" style="z-index: 0;">
+
+    <div>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam odit unde laboriosam eum omnis magni architecto minus! Autem nihil cupiditate adipisci veritatis laboriosam quod quibusdam sed! Illo debitis commodi nobis.</div>
+    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum ullam quos laborum quisquam! Optio ad possimus dolorem praesentium porro neque voluptate asperiores quae adipisci, eveniet a, enim ab corporis magnam.</div>
+
+
+</body>
+</html>

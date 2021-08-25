@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            
+            .mothersquare {
+                width: 200px;
+                height: 200px;
+                border: 2px solid red;
+            }
+
+            .childsquare {
+                width: 50%;
+                height: auto;
+                border: 2px solid navy;
+            }
+
+            .centerdiv1 {
+                width: 400px;
+                margin: auto;
+                border: 3px solid rgb(42, 43, 41);
+            }
+
+            .centerdiv2 {
+                max-width: 400px;
+                margin: auto;
+                border: 3px solid rgb(33, 105, 173);
+            }
+        </style>
+    </head>
+    <body>
+    
+        <div class="mothersquare">
+            <div class="childsquare">I am a child square. 
+                And my width is 50% of my mother square</div>
+        </div>
+        <br>
+        <div class="centerdiv1">
+            This division  element has a width of 400px, and margin set to auto.
+            This elemeent will not auto-resize but the browser will show a scroll bar.
+        </div>
+        <br>
+        <div class="centerdiv2">
+            This division element has a max-width of 400px, and margin set to auto.
+            This element will auto-resize if the browser windows is smaller than 400px.
+        </div>
+    </body>
+</html>
