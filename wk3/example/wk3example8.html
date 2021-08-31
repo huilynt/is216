@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <style>
+      .box {
+        background-color: goldenrod;
+        border: 1px solid black;
+      }
+    </style>
+    <title>Table!</title>
+  </head>
+
+<body>
+
+    <div class="container">
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Address</th>
+            </tr>
+            
+            <tr>
+                <th>1</th>
+                <td>Mark</td>
+                <td>Berlin</td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td>Jacob</td>
+                <td>England</td>
+            </tr>    
+        </table>
+    </div>
+    <div class="container">    
+        <table class="table">
+            <caption>List of users</caption> 
+            <!--style on the table header-->
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Berlin</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>England</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <table class="table table-borderless table-dark"> 
+            <caption class="text-center">List of users</caption> 
+            <thead> 
+                <tr> 
+                    <th scope="col">#</th> 
+                    <th scope="col">Name</th> 
+                    <th scope="col">Address</th> 
+                </tr> 
+            </thead> 
+            <tbody> 
+                <tr> 
+                    <th scope="row">1</th> 
+                    <td>Mark</td> 
+                    <td>Berlin</td> 
+                </tr> 
+            </tbody> 
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>      
+</body>
+</html>
