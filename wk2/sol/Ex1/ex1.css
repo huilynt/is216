@@ -1,0 +1,21 @@
+ p {
+    color:green;
+    font-family:'Courier New', Courier, monospace;
+    font-size:15px;
+    }  
+
+
+div {
+    border-radius: 5px;
+    background-color:rgb(212, 239, 248);
+    padding:20px;
+    }
+
+h2 {
+    color:blue;
+    }
+
+h3 {
+    color:purple;
+    font-style:italic;
+}

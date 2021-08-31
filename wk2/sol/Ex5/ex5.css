@@ -1,0 +1,59 @@
+ .greenbox {
+            background-color: #BEFEEB;
+        }
+        
+        .redbox {
+            background-color: #FFC8C8;
+        }
+    
+        
+        h1 {
+            font-family: Verdana, sans-serif;
+        }
+        
+        h2 {
+            font-family: Verdana, sans-serif;
+            color:blue;
+        }
+        
+        h3 {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 15px;
+            font-style: italic;
+        }
+        
+
+        table, th, td {
+            border: 1px solid black;
+            
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th.first {
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-size:15px;
+            padding: 5px;
+            width:30%;
+        }
+        
+        
+        th.rest {
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-size:15px;
+            padding: 5px;
+            width:10%;
+        }
+
+        td{
+             padding: 5px;
+        }
+
+        .cellbold{
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-size:15px;
+            font-weight: bold;
+        }
