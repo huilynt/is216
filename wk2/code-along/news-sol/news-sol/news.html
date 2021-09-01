@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+
+    <style>
+        body {
+            width: 100%;
+            margin:0;
+        }
+
+        .title {
+            background:rgb(50, 180, 39); 
+            text-align: center;
+            padding:60px; 
+            color: white;
+        }
+
+        .underline {
+            text-decoration: underline;
+        }
+
+        nav {
+            background: black;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration-line:none;
+            margin: 5px;
+        }
+
+        nav a:hover {/* pseudo-class selector selects state of an element */
+            color: green;
+        }
+
+        nav a:active {/* pseudo-class selector selects state of an element */
+            color: yellow;
+        }
+
+        .author {
+            background: rgb(158, 147, 147);
+            padding: 15px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .author-img {
+            width: 200px;
+            height: auto;
+        }
+
+        .thumbnail {
+            width: 50px;
+            height: auto;
+            display: block;
+            margin-top: 5px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .border {
+            border:1px solid black;
+            border-radius: 5%;
+            padding: 5px;
+        }
+
+        .fakeimg {
+            width: 50%;
+            height: 300px;
+            background:rgb(255, 208, 0);
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <header id="intro" style="background:rgb(241, 239, 231); font-size: 1.2em; text-align:center; padding-top:10px; padding-bottom:10px">Introductory Info</header>
+
+    <div class="title">
+        <h2>Today's News</h2>
+
+        <p>With a <span class="underline">nice</span> layout</p>
+    </div>
+
+    <nav>
+        <a href="#">Link</a>
+        <a href="#">Link</a>
+        <a href="#">Link</a>
+        <a href="#">Link</a>
+    </nav>
+
+    <!-- content -->
+    <table>
+        <tr>
+            <!-- author part -->
+            <td class="author"> 
+                <h2>Author</h2>
+
+                <img class="author-img" src="img/journalist.png">
+
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+                <h3>More News</h3>
+                <p>Lorem ipsum dolor sit amet</p>
+
+                <img class="thumbnail" src="img/thumb_news.png">
+                <img class="thumbnail" src="img/thumb_news.png">
+                <img class="thumbnail" src="img/thumb_news.png">
+
+
+            </td>
+            <!-- main content -->
+            <td class="main">
+                <h2>Title Heading</h2>
+
+                <p>Title description, Aug 19, 2020</p>
+
+                <div class="border">
+                    <a href="https://www.bbc.com/news/world-us-canada-53761744">
+                
+                        <img style="width:800px;" src="img/news.png"></a>
+                </div>
+
+                <p>Some text</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+
+                <h2>TITLE HEADING</h2>
+                <p>Title description, Aug 19, 2020</p>
+
+                <div class="fakeimg">Image</div>
+
+                <p>Some text</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+
+            </td>
+        </tr>
+    </table>
+
+    <footer style="background:rgb(241, 239, 231); font-size: 0.7em; text-align:center; padding-top:10px; padding-bottom:10px"> &copy; IS216 G3</footer>  
+</body>
+</html>
