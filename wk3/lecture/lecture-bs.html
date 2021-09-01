@@ -79,22 +79,39 @@
         For example, .container-sm occupies 100% wide 
         until the sm breakpoint is reached, where it will scale up with md, lg, xl, and xxl.
     -->
-    <div class="container-md">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti porro deserunt architecto id, ipsum rem vel dolore voluptates eum? Impedit deserunt et maiores, in animi molestias reprehenderit cum consectetur nesciunt!</div>
-   
-    <hr>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus sunt, debitis quam culpa doloremque quidem ducimus. Ipsa, aliquam iure aperiam laudantium, excepturi ipsam quas accusamus quisquam tempora nemo atque labore?</div>
+    <div class="container-fluid px-1 text-white bg-secondary"> <!-- 2 means 0.25 * 16 = 4px) rem default font-size 16px -->
+        <div class="row text-center">
+          
+            <div class="col border-bottom border-primary border-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita enim nihil, fuga, praesentium minima ad molestiae iusto amet ex rem sequi nulla hic quo odit beatae incidunt, deserunt perspiciatis eos.</div>
 
-            <div class="col-md-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus sunt, debitis quam culpa doloremque quidem ducimus. Ipsa, aliquam iure aperiam laudantium, excepturi ipsam quas accusamus quisquam tempora nemo atque labore?</div>
-    
-            <div class="col-md-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus sunt, debitis quam culpa doloremque quidem ducimus. Ipsa, aliquam iure aperiam laudantium, excepturi ipsam quas accusamus quisquam tempora nemo atque labore?</div>
-    
-            <div class="col-md-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus sunt, debitis quam culpa doloremque quidem ducimus. Ipsa, aliquam iure aperiam laudantium, excepturi ipsam quas accusamus quisquam tempora nemo atque labore?</div>
+            <div class="col border-bottom border-primary border-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita enim nihil, fuga, praesentium minima ad molestiae iusto amet ex rem sequi nulla hic quo odit beatae incidunt, deserunt perspiciatis eos.</div>
+
+            <div class="col border-bottom border-primary border-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita enim nihil, fuga, praesentium minima ad molestiae iusto amet ex rem sequi nulla hic quo odit beatae incidunt, deserunt perspiciatis eos.</div>
         </div>
     </div>
 
+    <hr> <!-- HTML element: horizontal line -->
+
+    <div class="row">
+        <div class="col">
+            <div class="box">
+                <!-- For inline-type elements, you cannot set width and height -->
+                <div class="w-25 h-75 bg-secondary d-inline">Width 25% Height 75%</div>
+                <div class="w-25 h-75 bg-secondary d-inline">Width 25% Height 50%</div>
+            </div>
+        </div>
+    </div>
     <hr>
+
+    <div class="row">
+        <div class="col">
+            <div class="box">
+                <!-- For block-type elements and inline but block-type elements, you set width and height -->
+                <div class="w-25 h-75 bg-secondary d-inline-block">Width 25% Height 75%</div>
+                <div class="w-25 h-50 bg-secondary d-inline-block">Width 25% Height 50%</div>
+            </div>
+        </div>
+    </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
