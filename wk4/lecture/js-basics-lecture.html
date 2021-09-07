@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Syntax & Operations</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  
+    <script>
+        function foo() {
+            let j = 10
+            //console.log("from function: " + i)
+            return j
+        }
+    </script>
+</head>
+<body>
+    <div class="m-2 lead bg-info text-center" id="demo"></div>
+    <button class="btn btn-primary d-block m-2" onclick="number()">Number</button>
+    <button class="btn btn-primary d-block m-2" onclick="findSubStr()">Find a Substring</button>
+    <button class="btn btn-primary d-block m-2" onclick="addSortSchools()">Add and Sort Schools</button>
+    <button class="btn btn-primary d-block m-2" onclick="updateCheapestFruit()">Update the cheapest fruit</button>
+
+    <button class="btn btn-primary d-block m-2" onclick="generatePassword()">Advanced: Generate Random Password</button>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <script>
+    /*
+    Reference: https://www.w3schools.com/js/
+    1. Comments: /* vs //
+    2. Debug with console.log
+    3. Keywords: var, let, if...else, for, for...in, for...of, 
+                    continue, break, function, return, try...catch
+
+    4. Naming convention: 
+        Recommended: Lower Camel Case ( e.g. firstName )
+        Not allowed: Kebab case ( e.g. first-name )
+
+    5. Data types: Number, Boolean, Null, Undefined, String, Array, Object
+        -- use typeof operator to check data type
+        -- var x = 10.2                     // number
+        -- var x = true                     // boolean
+        -- var x = null                     // null
+        -- var x                            // undefined
+        -- var x = "Yournal Drunk"          // string
+        -- var x = ["Yournal", 60, true]    // array -> a kind of object
+        -- var x = { name: "Yournal", age: 60, isMarried: true }    // object
+        
+    6. var vs let
+        - var & let   : Global scope if defined outside function (and block for let)
+        - var & let   : Function scope if defined inside function
+        - let         : Block scope if defined inside block
+        - var         : No Block scope
+
+    7. for  : loop as long as given condition evaluates to true 
+    8. for...in : loop through properties of an object 
+    9. for...of : loop through values of an iterable variable 
+                        (e.g. Array, String, NodeList etc.) 
+
+    10. Number Operations: Number(), parseInt(), parseFloat(), isNaN()
+
+    11. String Operations : length, indexOf(), toUpperCase(), trim(), slice(), 
+                            substr(), replace(), split(), many more...
+
+    12. Array Operations : legnth, push(), pop(), splice(), join(), 
+                            slice(), sort(), reverse(), many more...
+
+    13. Object: Read/Write operations
+
+    14. Callback functions : filter, find, forEach, ...
+    
+    */
+
+    var output = document.getElementById("demo"); 
+
+    // Task 1: State the data types of following variables
+    var txt = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+"; 
+    var found = false; 
+    var numbers = [5, 17, 30, 11, 21, 1, 0]; 
+    var schools = ["LKCSB", "SOA", "SOL"]; 
+
+    var fruits = [ 
+            {name: "Apple", price: 1.5},
+            {name: "Orange", price: 2.5},
+            {name: "Mango", price: 4.5},
+            {name: "Durian", price: 24},
+            {name: "Banana", price: 3.8},
+            {name: "Peach", price: 2.9}
+        ] 
+
+
+    // Number 
+    function number() {
+        /*
+            Task 2:
+            Implement a function that asks the user to enter a number
+            Check if the user input is a number
+            If the user input is not a number, alert the message "Your input is not a number"
+            Otherwise, display the user input
+
+            Hint: explore Number(), parseInt()
+        */
+       
+
+    }
+
+    // String operations
+    function findSubStr() {
+        /*
+            Task 3:
+            Write a function that asks the user to enter a string, say str, and two characters, say st and en.
+            The function then searches for a substring in txt such that the substring begins with the character st and ends with the character en.
+            If the substring is found, display the substring.
+            If there is no such substring, display the message "No such substring".
+
+            Hint: explore includes(), indexOf(), slice()
+        */
+      
+    }
+
+    // Array operations
+    function addSortSchools() {
+        /* 
+            Task 4: 
+            Ask the user to enter a new school name, e.g. SOE
+            Add the new school name provided by the user into the given array called schools
+            Add another school called "SCIS" by replacing an existing school at index 1
+            Sort the resulting schools array alphabetically
+            Display each school, separated by a colon : (e.g. LKCSB:SCIS:SOE:SOL)
+
+            Hint: explore push(), splice(), sort()
+        */
+     
+    
+    }
+
+    
+    // Object read/write, for...of, for..in, callback
+    function updateCheapestFruit() {
+        /*
+            Task 5:
+            Ask the user to enter a new price for the cheapest fruit
+            Find the cheapest fruit in the given array called fruits
+            Update the price of the cheapest fruit in the given fruits array with the new price
+            Sort the fruits according to their prices
+            Display the fruits in a list <ul>
+
+            Hint: find(), sort()
+
+        */
+      
+    }
+
+    // Advanced: string operation, number operation, and regex
+    function generatePassword() {
+        /*
+           Task 6: 
+            Generate password that meets the following criteria
+                1. password length is equal to the length given by the user
+                2. password must contain at least ONE special symbol
+                3. password must contain at least ONE number
+                4. password must contain at least ONE Uppercase letter
+                5. password must contain at least ONE Lowercase letter
+
+            Hint: explore Math.floor, Math.random, search()
+        */
+        let len = prompt("Please enter the password length (larger than 4)");
+
+    }
+</script>
+
+</body>
+</html>
