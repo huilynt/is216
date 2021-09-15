@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        WAD II: Week 4
+    </title>
+</head>
+
+<body>
+    <div id="div1"></div>
+    <script>
+        var user = {
+            name: "Mary",
+            age: 26,
+            hobby: ["swimming", "badminton"],
+            isMarried: false,
+            addHobby: function (new_hobby) {
+                this.hobby.push(new_hobby);
+            }
+        };
+        
+        //the following shows how to access object properties and methods
+        console.log(user.name);
+        console.log(user["age"]);
+        user.addHobby("boulder");
+        user["addHobby"]("basketball"); 
+
+        var props = "";
+        for (var propName in user) {
+            // alert(propName);
+            props += propName + ": " + user[propName] + "; \n";
+        }
+        console.log(props);
+
+        //the following shows how to modify object properties and methods
+        user.age = 27;
+        user["isMarried"] = true; 
+        user.addHobby = new Function("new_hobby", "this.hobby.unshift(new_hobby)"); 
+        console.log("after updating properties and methods");
+        var props = "";
+        for (var propName in user) {
+            // alert(propName);
+            props += propName + ": " + user[propName] + "; \n";
+        }
+        console.log(props);
+        //console.log(user);
+
+        //the following shows how to introduce new properties and methods 
+        user.height = 170;
+        user.countHobbies = new Function("return this.hobby.length");
+        console.log("after introducing new properties and methods");
+        var props = "";
+        for (var propName in user) {
+            // alert(propName);
+            props += propName + ": " + user[propName] + "; \n";
+        }
+        console.log(props);
+        //console.log(user);
+
+        //the follwing shows how to delete properties and methods
+        delete user.height;
+        delete user.countHobbies;
+        console.log("after deleting new properties and methods")
+        var props = "";
+        for (var propName in user) {
+            // alert(propName);
+            props += propName + ": " + user[propName] + "; \n";
+        }
+        console.log(props);
+        //console.log(user)
+    </script>
+</body>
+
+</html>

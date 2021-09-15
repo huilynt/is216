@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>for ... in vs for ... of ... </title>
+</head>
+
+<body>
+	<script>
+		var person = {
+			firstName: "Yournal",
+			lastName: "Drunk",
+			age: 50
+		};
+	
+		console.log("Trying for in on object");
+		var prop;
+		for (prop in person) {
+			console.log(person[prop]);
+		}
+
+		var sharks = ["great white", "tiger"];
+
+		console.log("Trying for of on array");
+		for (shark of sharks) {
+			console.log(shark);
+		}
+
+		for (shark in sharks) {
+			console.log(shark);
+		}
+
+		console.log("Trying for of on string");
+
+		for (c of "sfdagdsg@da") {
+			console.log(c);
+			if (c == "@") {
+				found = true;
+			}
+		}
+
+	</script>
+</body>
+
+</html>

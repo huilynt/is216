@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Functions are Objects </title>
+</head>
+
+<body>
+	<script>
+		function Book(type, author) {
+			this.type = type; // remove this and try
+			this.author = author;
+			this.getDetails = function () {
+				return type + " written by " + author;
+			}
+		}
+		var book = new Book("Fiction", "Peter King");
+		alert(book.getDetails());
+		// result: “Fiction written by Peter King”
+		alert(book.type);
+	</script>
+</body>
+
+</html>
