@@ -1,75 +1,151 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title>
-        WAD II: Week 4
-    </title>
-</head>
-
-<body>
-    <div id="div1"></div>
+  ​
+  <head>
+    <title>WAD II: Week 4</title>
+    ​
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+  </head>
+  ​
+  <body>
+    <div class="bg-success text-white m-2 p-2 text-center" id="div1">​</div>
     <script>
-        var user = {
-            name: "Mary",
-            age: 26,
-            hobby: ["swimming", "badminton"],
-            isMarried: false,
-            addHobby: function (new_hobby) {
-                this.hobby.push(new_hobby);
-            }
-        };
-        
-        //the following shows how to access object properties and methods
-        console.log(user.name);
-        console.log(user["age"]);
-        user.addHobby("boulder");
-        user["addHobby"]("basketball"); 
+              var prop = "name";
+              var fvar = "modifyAge";
+              var newAge = 21;
+              var divEle = document.getElementById("div1");
+      ​
+              var name = "Prf Shar";
+              function user() {
+                  console.log(this.name);
+                  //console.log(this.fvar);
+              }
+      ​
+              user(); // this refers to the global object
+      ​
+              var user1 = {
+                  name: "Jack",
+                  getName: user
+              }
+      ​
+              var user2 = {
+                  name: "Mary",
+                  getName: user
+              }
+      ​
+              user1.getName();
+      ​
+              user2.getName();
+      ​
+              /*
+                  Anonymous functions
+                  Callback functions
+              */
+      ​
+              var fruits = ["Orange", "Apple", "Banana"];
+              //console.log(fruits);
+              var text = "<ul>";
+              fruits.forEach(function(element) {
+                  text += "<li>" + element + "</li>"
+              });
+      ​
+              fruits.forEach(myFunc);
+      ​
+              function myFunc(element) {
+                  text += "<li>" + element + "</li>";
+              }
+      ​
+              text = text + "</ul>";
+              console.log(text);
+      ​
 
-        var props = "";
-        for (var propName in user) {
-            // alert(propName);
-            props += propName + ": " + user[propName] + "; \n";
-        }
-        console.log(props);
+      ​
+              console.log(text);
+      ​
+              divEle.innerHTML = text;
+      ​
+              function normalFun() {
+                  console.log("hello");
+              }
+      ​
+              var f = function() {
+                  console.log("hello");
+              } // Anonymous functions
+      ​
+              //f();
+      ​
+              //setTimeout(f, 3000) // wait for 3 sec and invoke function var f
+      ​
 
-        //the following shows how to modify object properties and methods
-        user.age = 27;
-        user["isMarried"] = true; 
-        user.addHobby = new Function("new_hobby", "this.hobby.unshift(new_hobby)"); 
-        console.log("after updating properties and methods");
-        var props = "";
-        for (var propName in user) {
-            // alert(propName);
-            props += propName + ": " + user[propName] + "; \n";
-        }
-        console.log(props);
-        //console.log(user);
+      ​
+              //setTimeout(normalFun, 3000);
 
-        //the following shows how to introduce new properties and methods 
-        user.height = 170;
-        user.countHobbies = new Function("return this.hobby.length");
-        console.log("after introducing new properties and methods");
-        var props = "";
-        for (var propName in user) {
-            // alert(propName);
-            props += propName + ": " + user[propName] + "; \n";
-        }
-        console.log(props);
-        //console.log(user);
+              var user = {
+                  name: "Mary",
+                  age: 26,
+                  hobby: ["swimming", "badminton"],
+                  isMarried: false,
+                  addHobby: function (newHobby, b) {
+                      // this.hobby.push(newHobby);
+                      this.hobby.unshift(newHobby);
+                  },
+                  modifyAge: function (newAge) {
+                      this.age = newAge;
+                  }
+              }; // this is a user-defined object
+              // Math.PI; // this is a property of Math object
+              //the following shows how to access object properties and methods
+              //console.log(); // is a method of console object
+              //user.addHobby("football")
+      ​
+              //console.log(user.hobby); // in php, we use obj->name
+              //console.log(user[prop]);
+      ​
+              user.addHobby("boulder");
+              user[fvar](newAge);
+              // console.log(user.age);
+      ​
+              var props = "";
 
-        //the follwing shows how to delete properties and methods
-        delete user.height;
-        delete user.countHobbies;
-        console.log("after deleting new properties and methods")
-        var props = "";
-        for (var propName in user) {
-            // alert(propName);
-            props += propName + ": " + user[propName] + "; \n";
-        }
-        console.log(props);
-        //console.log(user)
+      ​
+              //the following shows how to modify object properties and methods
+              user.age = 27;
+              user["isMarried"] = true;
+              user.addHobby = new Function("newHobby", "b", "this.hobby.unshift(new_hobby)");
+              //console.log("after updating properties and methods");
+              //console.log(user);
+              for (let propName in user) {
+                  // alert(propName);
+                  props += propName + ": " + user[propName] + "; \n";
+              }
+              //divEle.innerHTML = props;
+              //console.log(props);
+      ​
+              //the following shows how to introduce new properties and methods
+              user.height = 170;
+              user.countHobbies = new Function("return this.hobby.length");
+              //console.log("after introducing new properties and methods");
+              //console.log(user);
+      ​
+              //the follwing shows how to delete properties and methods
+              delete user.height;
+              delete user.countHobbies;
+              //console.log("after deleting new properties and methods")
+              //console.log(user)
     </script>
-</body>
-
+    ​
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+    ​
+  </body>
+  ​
 </html>
