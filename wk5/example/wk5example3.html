@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Form</title>
+</head>
+
+<body>
+    <form action="wk5example1.html" onsubmit="return validateForm()">
+      Email: <input type="text" id="email" name="email">
+      Password: <input type="password" name="password">
+      <input type="submit" value="Submit">
+    </form>
+  <script>
+    function validateForm() {
+      // getElementsByName returns a collection of 
+      console.log(document.getElementsByName("password")[0].type);
+      var input = document.getElementById("email").value;
+      if (input.indexOf("@") == -1) {
+        alert("No @ detected. Alert, alert.");
+        return false;
+      } else {
+        return true;
+      }
+       
+    }
+  </script>
+</body>
+
+</html>

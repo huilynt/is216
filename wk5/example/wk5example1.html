@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Week 5 Example 1</title>
+</head>
+<body>
+  <h1>My header</h1>
+  <!-- <p id="time">Time</p> -->
+  <!-- What do you think would happen if the above <p> tag is un-commented? -->
+  <p id="time">Time</p> 
+  <button onclick= "document.getElementById('time').innerText= Date()">What time is it? </button>
+
+  <p class="hello">To be updated</p>
+  <p class="hello">To be updated</p>
+  <button onclick= "sayHello()">Say Hello </button>
+
+    <script>
+      function sayHello() {
+        //be mindful that x is an array here
+        var x = document.getElementsByClassName("hello");
+        for (let ele of x) {
+          ele.innerHTML = '<p style="background-color:tomato;">Hello~~~</p>';
+          // this doesn't work here!
+          // ele.innerText = '<p style="background-color:tomato;">Hello~~~</p>';
+          
+        }
+      }
+    </script>
+
+    <div id="div1">
+      <div class="is216">
+          <p>hello</p>
+          <div class="is216">IS216</div>
+      </div>
+      <div class="is113">
+          <div class="is216">is216 in is113</div>
+      </div>
+    </div>
+
+    <div class="is216">
+      is216 outside div1
+    </div>
+
+    <script>
+      var x = document.getElementById("div1");
+      var y = x.getElementsByClassName("is216");
+      console.log(y);
+    </script>
+
+
+</body>
+</html>

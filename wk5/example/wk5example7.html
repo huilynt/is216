@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My title</title>
+</head>
+<body>
+  <a href="ex1.html">ex1</a>
+  <a href="ex2.html">ex2</a>
+  <a href="ex3.html">ex3</a>
+  <img id="myPic" src="./emo.png">  
+  <script>
+     var nodes = document.getElementsByTagName("a");
+     // change the value of href attribute 
+     // of the first <a> element
+     nodes[0].getAttributeNode("href").value = "ex4.html";
+     //document.getElementsByTagName("a")[0].setAttribute("href", "ex4.html");  
+     document.getElementById("myPic").src = "./emo2.png";
+  </script>
+</body>
+</html>

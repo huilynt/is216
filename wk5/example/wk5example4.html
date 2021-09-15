@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form</title>
+</head>
+<body>
+<form id="frm" action="#" >
+	Name: <input type="text" name="name">
+	<input type="submit" value="Go" >
+</form> 
+
+<button onclick="display()">Click Me!</button>
+<p id="frmEle"></p>
+<script>
+  function display() {
+      //the following finds the form with id "frm"
+      var x = document.forms["frm"];
+      // .action is the property of the form element
+      var out = x.action + "<br>";
+      //the following reads the input elements in the form one-by-one
+      for (let i = 0; i < x.length; i++) {
+        out += x.elements[i].value + "<br>";
+      }
+    //the following sets the content of the element with id "frmEle" with the inputs
+    document.getElementById("frmEle").innerHTML = out;
+
+    //var y = document.form;
+    /*out = "";
+    for (i = 0; i < y.length; i++) {
+      //.action is the property action of the element
+      out += y[i].action + "<br>"; 
+    }
+    alert(out); */
+  }
+</script>
+  </body>
+</html>

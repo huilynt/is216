@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My title</title>
+</head>
+<body>  
+  <div onmouseover="mOver(this)" onmouseout="mOut(this)" >
+    Mouse Over Me
+    </div>
+    
+    Enter your name: <input type="text" onfocus="mFocus(this)">
+      
+    <p>When the input field gets focus, a function is triggered which changes the background-color.</p>
+      
+
+    <h1 onmouseover="style.color='red'"							
+					onmouseout="style.color='black'">
+	    Mouse over this text
+    </h1>
+
+    <script>
+    function mOver(obj) {
+        obj.innerHTML = "Thank You"
+    }
+    
+    function mOut(obj) {
+        obj.innerHTML = "Mouse Over Me"
+    }
+
+    function mFocus(x) {
+        x.style.background = "yellow";
+    }
+    </script>
+      
+</body>    
+</html>

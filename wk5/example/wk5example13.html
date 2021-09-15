@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My title</title>
+</head>
+<body>  
+    <img id="myImg" src="./emo.png">
+
+    <script>
+       var img = document.getElementById("myImg");
+       //the first parameter
+       img.addEventListener("click", changeImage);
+       function changeImage() {
+          img.src = "./emo2.png";
+       }
+    </script>    
+      
+</body>    
+</html>
