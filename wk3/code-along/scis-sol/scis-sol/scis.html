@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+    crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" href="favicon.ico">
+
+    <title>Home | School of Computing & Information Systems (SMU)</title>
+</head>
+<body>
+    
+    <div class="container-fluid">
+        <!-- first row: advisories and updates -->
+        <div class="row bg-danger">
+            <div class="col">
+                <a class="btn text-white mx-auto d-block" href="https://crisisresponse.smu.edu.sg/" role="button">
+                    Advisories and updates on 2019 Novel Coronavirus (COVID-19)
+                
+                    <!-- https://icons.getbootstrap.com/ -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                        <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+                      </svg>
+                </a>
+            </div>
+        </div>
+        <!-- second row: univeristy nav bar -->
+        <div class="row bg-dark">
+            <div class="col-2 border-end border-white">
+                <!-- https://getbootstrap.com/docs/5.1/components/navs-tabs/ -->
+                <ul class="nav">
+                    <li class="nav-item">
+                      <a class="nav-link active px-1" aria-current="page" href="https://scis.smu.edu.sg/events">
+                        <img class="icon" src="img/icon1.png">
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link px-1" href="https://scis.smu.edu.sg/rss">
+                        <img class="icon" src="img/icon2.png">
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link px-1" href="https://www.facebook.com/SgSMUSIS">
+                        <img class="icon" src="img/icon3.png">
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-1" href="https://www.youtube.com/channel/UCP9tOGPsNkPhqfQUQOgtUVQ">
+                          <img class="icon" src="img/icon4.png">
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link px-1" href="https://scis.smu.edu.sg/about/contact/visit/us">
+                          <img class="icon" src="img/icon5.png">
+                        </a>
+                      </li>
+                    <!-- <li class="nav-item">
+                      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li> -->
+                  </ul>
+            </div>
+            <div class="col-6 border-end border-white"></div>
+            <div class="col-2 border-end  border-white"><a class="btn btn-dark w-100" href="https://library.smu.edu.sg/" target="_blank" role="button">SMU Libraries</a></div>
+            <div class="col-2 border-end">
+                <!-- https://getbootstrap.com/docs/5.1/components/dropdowns/ -->
+                <div class="dropdown">
+                    <a class="btn text-white dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                      Connect
+                    </a>
+                  
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- third row: scis logo -->
+        <div class="row sis-bg">
+            <div class="col ps-0"><img class="w-50" src="./img/logo.png"> </div>
+        </div>
+        
+        <!-- fourth row: scis nav bar -->
+        <div class="row sis-bg">
+            <div class="col-1"></div>
+            <div class="col-9">
+                <!-- https://getbootstrap.com/docs/5.1/components/dropdowns/ -->
+                <div class="btn-group">
+                    <button type="button" class="btn text-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    About
+                    </button>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-2">
+                <a class="btn btn-secondary" href="#" role="button">Contact Us</a>
+               <!--  <button type="button" class="btn btn-secondary">Contact Us</button> -->
+            </div>
+        </div>
+
+        <!-- fifth row: carousel -->
+        <div class="row">
+            <div class="col px-0">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img src="./img/slide1.png" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="./img/slide2.png" class="d-block w-100" alt="...">
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+    crossorigin="anonymous"></script>
+    
+</body>
+</html>

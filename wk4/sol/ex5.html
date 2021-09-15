@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Palindrome</title>
+</head>
+<body>
+
+	<script>
+        var str = prompt("If you provide a string, I will tell you if it is a Palindrome!"); 
+
+        // turn the string to lowercase
+        str = str.toLowerCase();
+
+        // remove spaces
+        str = str.replace(/ /g, "");
+        //str = str.replaceAll(" ", "");
+        console.log(str);
+
+        // reverse input string 
+        // split the string into an array of characters first and reverse the array
+        // then form the string again by joining the array elements
+        var str2 = str.split('').reverse().join('');
+
+        if(str == str2) {
+            // use a delay function: https://www.w3schools.com/jsref/met_win_settimeout.asp
+            // Display an alert box after 1 seconds (1000 milliseconds)
+            setTimeout(function(){ alert("Palindrome!"); }, 1000);
+
+        } else {
+            setTimeout(function(){ alert("Not Palindrome!"); }, 1000);
+        }
+
+
+	</script>
+</body>
+</html>
