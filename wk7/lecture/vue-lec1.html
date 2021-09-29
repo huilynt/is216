@@ -1,41 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vue Lecture - Part I</title>
 
-     <!-- Bootstrap CSS -->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
-     integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
-     crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
 
     <!-- VueJS -->
     <script src="https://unpkg.com/vue@next"></script>
 
     <style>
-        body {
-            width: 100%;
-            text-align: center;
-        }
+      body {
+        width: 100%;
+        text-align: center;
+      }
 
-        .male {
-            background-color: rgb(135, 135, 163);
-            
-        }
+      .male {
+        background-color: rgb(135, 135, 163);
+      }
 
-        .female {
-            background-color: pink;
-            
-        }
-        .center {
-            margin: 20px auto;
-            display: block;  
-        }
+      .female {
+        background-color: pink;
+      }
+      .center {
+        margin: 20px auto;
+        display: block;
+      }
     </style>
 
     <script>
-        /*
+      /*
             1. Install Vue extension: Vetur -- for auto-completion, Syntax-highlighting, Error Checking, etc.
             2. Documentation -- https://v3.vuejs.org/
             3. Importing Vue library from CDN
@@ -75,21 +76,89 @@
                 v-bind:class = "[classProp, anotherClassProp]"
                 v-bind:class="{'classProp' : isActive}" 
                 v-bind:style="{'property':value}"
-        */ 
+        */
     </script>
-</head>
-<body>
-
+  </head>
+  <body>
     <h1>Random User Generator</h1>
+    <div id="app">
+      <div :class="gender">
+        <img :src="picture" style="width: 100px; height: 100px" />
+        <!-- <img v-bind:src="picture" style="width: 100px; height: 100px" /> -->
+        <p :style="{'font-family': font, 'font-size': size}">
+          {{ getFullName() }}
+        </p>
+        <p>{{ email }}</p>
 
+        <!-- <button @click="counter+=1">{{ counter }}</button> -->
+        <!-- <button v-on:click="counter+=1)">{{ counter }}</button> -->
+      </div>
+
+      <button :class="[b, theme]" @click="getUser()">
+        Generate A Random User
+      </button>
+
+      <h3>Modify Info</h3>
+      Modify emails: <input type="text" v-model="email">
+    </div>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          // data object
+          return {
+            firstName: "firstName",
+            lastName: "lastName",
+            picture: "../img/cat1.jpg",
+            email: "email@email.com",
+            gender: "male",
+            counter: 0,
+            font: "'Courier New', Courier, monospace",
+            size: "1.5em",
+            b: 'btn',
+            theme: "btn-primary",
+          };
+        },
+        methods: {
+          // methods object
+          getFullName() {
+            return this.firstName + " " + this.lastName.toUpperCase();
+          },
+          modifyName(name) {
+            this.firstName = name;
+          },
+          getUser() {
+            axios
+              .get("https://randomuser.me/api")
+              .then((response) => {
+                console.log(response.data);
+                var { name, picture, gender, email } = response.data.results[0];
+                this.firstName = name.first;
+                this.lastName = name.last;
+                this.picture = picture.large;
+                this.gender = gender;
+                this.email = email;
+              })
+              .catch((error) => {
+                console.log(error.message);
+              });
+          },
+        },
+      });
+
+      const vm = app.mount("#app");
+
+      console.log(vm.lastName);
+    </script>
 
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
-    crossorigin="anonymous"></script>
-
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JSON</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <div id="ex"></div>
 
     <script>
-        var data = `{
+      var data = `{
             "success": true,
             "result": {
                 "resource_id": [
@@ -48,17 +47,18 @@
                     }
                 ]
             }
-        }`
+        }`;
 
-        // this converts JSON string to JS object
-        var jsObj = JSON.parse(data)  
+      // this converts JSON string to JS object
+      var jsObj = JSON.parse(data);
 
-        // after converting to JS object, we can access the desired values by accessing its properties
-        console.log(jsObj.success)
+      // after converting to JS object, we can access the desired values by accessing its properties
+      console.log(jsObj.success);
+      console.log(jsObj.result.records[0].timestamp);
+      var records = jsObj.result.records[0];
+      var result = "<h1>Singapore Exchange Rate</h1>";
 
-        var result = "<h1>Singapore Exchange Rate</h1>"
-
-        /*
+      /*
             Task: Add code below, 
                 to display the following in the browser as an unordered list
                 as shown in fig.png
@@ -68,11 +68,16 @@
                 - resource_id
         */
 
-      
+      result += `
+        <ul>
+            <li>timestamp: ${records.timestamp}</li>
+            <li>usd_sgd: ${records["usd_sgd"]}</li>
+            <li>total: ${jsObj.result.total}</li>
+            <li>resource_id: F${jsObj.result["resource_id"][0]}</li>
+        </ul>
+      `;
 
-        document.getElementById("ex").innerHTML = result
-
+      document.getElementById("ex").innerHTML = result;
     </script>
-    
-</body>
+  </body>
 </html>
