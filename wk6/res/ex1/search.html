@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+
+    <!-- Add Axios Library -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <!-- add code here-->
+    <div class="container bg-light">
+      <div>Type a name in the input field below:</div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" />
+      <div id="suggestions">Suggestions:&nbsp;</div>
+    </div>
+    <script>
+      // add code here
+      var nameEle = document.getElementById('name');
+      nameEle.addEventListener('keyup', showHint);
+      function showHint(event) {
+        var value = event.key;
+        console.log(nameEle.value);
+        axios
+          .get(`./getHint.php?query=${nameEle.value}`)
+          .then((response) => {
+            var suggsetionsEle = document.getElementById('suggestions');
+            suggsetionsEle.innerHTML += response.data;
+            console.log(response);
+          })
+          .catch((error) => {});
+      }
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

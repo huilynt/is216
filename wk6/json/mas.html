@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON</title>
+</head>
+<body>
+
+    <div id="ex"></div>
+
+    <script>
+        var data = `{
+            "success": true,
+            "result": {
+                "resource_id": [
+                    "10eafb90-11a2-4fbd-b7a7-ac15a42d60b6"
+                ],
+                "limit": 1,
+                "total": "404",
+                "records": [
+                    {
+                        "end_of_month": "1988-01",
+                        "preliminary": "0",
+                        "eur_sgd": null,
+                        "gbp_sgd": "3.5944",
+                        "usd_sgd": "2.0182",
+                        "aud_sgd": "1.4411",
+                        "cad_sgd": null,
+                        "cny_sgd_100": null,
+                        "hkd_sgd_100": "25.88",
+                        "inr_sgd_100": null,
+                        "idr_sgd_100": null,
+                        "jpy_sgd_100": "1.5873",
+                        "krw_sgd_100": null,
+                        "myr_sgd_100": "78.99",
+                        "twd_sgd_100": null,
+                        "nzd_sgd": null,
+                        "php_sgd_100": null,
+                        "qar_sgd_100": null,
+                        "sar_sgd_100": null,
+                        "chf_sgd": "1.4894",
+                        "thb_sgd_100": null,
+                        "aed_sgd_100": null,
+                        "vnd_sgd_100": null,
+                        "timestamp": "1632662620"
+                    }
+                ]
+            }
+        }`
+
+        // this converts JSON string to JS object
+        var jsObj = JSON.parse(data)  
+
+        // after converting to JS object, we can access the desired values by accessing its properties
+        console.log(jsObj.success)
+
+        var result = "<h1>Singapore Exchange Rate</h1>"
+
+        /*
+            Task: Add code below, 
+                to display the following in the browser as an unordered list
+                as shown in fig.png
+                - timestamp
+                - usd_sgd
+                - total
+                - resource_id
+        */
+
+      
+
+        document.getElementById("ex").innerHTML = result
+
+    </script>
+    
+</body>
+</html>

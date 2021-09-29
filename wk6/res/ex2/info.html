@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+        crossorigin="anonymous">
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2>Choose an option:</h2>
+                    <label for="limit">Limit:</label>
+                    <input id="limit" type="number" min=1 max=5 value=1>
+                    <select onchange="getData()">
+                        <option value="customers">Customers</option>
+                        <option value="products">Products</option>
+                        <option value="suppliers">Suppliers</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div id="result"></div>
+                </div>
+            </div>
+        </div>
+    
+        <script>            
+            var limitEle = document.getElementById("limit");
+            limitEle.addEventListener('keyup', getData)
+            function getData() {
+                console.log(this)
+                // Add Code Here
+                // axios.post(
+                //     `./getData.php`,
+                //     {
+                //         type:
+                //     }
+                // )
+
+            }
+
+            // You may also add helper function(s) as you deem fit
+            
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+        crossorigin="anonymous"></script>
+     
+    </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+    crossorigin="anonymous">
+    
+     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href='style.css'>
+
+    <title>Weather</title>
+</head>
+<body>
+    <div class="container-fluid">
+      <!-- this is from Bootstrap Doc -> components -> Navbar -->
+      <div class="row">
+        <div class="col px-0">    
+          <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#"><img src="img/logo.png"  style="width:30px;"> BT </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Log In</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link">Sign Up</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link">Sign Out</a>
+                  </li>
+                </ul>
+                <form class="d-flex">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <h1 class="col text-center">What's The Weather?</h1>
+      </div>
+
+      <form class="row g-3 mt-3 justify-content-center">
+        <div class="col-auto">
+          <label for="label" class="visually-hidden">Label</label>
+          <input type="text" readonly class="form-control-plaintext" id="label" value="Enter a city">
+        </div>
+        <div class="col-auto">
+          <label for="city" class="visually-hidden">City</label>
+          <input type="text" class="form-control" id="city" placeholder="e.g. Singapore, Tokyo">
+        </div>
+        <div class="col-auto">
+          <!-- 3 types of buttons: submit, reset, button -->
+          <!-- submit works with onsubmit event; button works with onclick event -->
+          <button type="button" id="weatherBtn" class="btn btn-info mb-2">What's the weather</button>
+        </div>
+      </form>
+  
+       <!-- Task: Add Code Here for displaying the weather result -->
+      <div class="row mt-5">
+          <div class="col-3"></div>
+          <div class="col-6">
+              <div id="data" class="bg-info text-center"></div>
+              
+              <div id="nodata" class="alert alert-danger text-center" role="alert">Feeling Good!</div>
+          </div>
+          <div class="col-3"></div>
+      </div>  
+    </div> 
+    
+<script src="weather.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+crossorigin="anonymous"></script>
+
+</body>
+</html>

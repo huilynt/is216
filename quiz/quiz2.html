@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Quiz2</title>
+
+</head>
+<!-- <body onload="alert('hello')"> -->
+<body>
+    <script>
+        // ************************************************
+        console.log("Valid Statements")
+        /* 
+            var pri-schools = [“Ai Tong”, “Canberra”, “Evergreen”]; // cannot use - for var name
+            Var first_name = "Seng"; // case
+            var x, y, z = 1, 2, 3; // cannot assign value like that
+        */
+
+        // object properties can be of different data types
+        ahseng = { name: 'Seng', age: 28, hobbies: ['pottery', 'swimming', 'running'] }; 
+
+        // array elements can be of different data types, but has only indices. NO properties
+        var person = [ 
+                        'Seng', 28, ['pottery', 'swimming', 'running'], true, { name: 'Mary', age: 21 } 
+                    ]
+        
+        // ************************************************
+        console.log("Print 3 separate lines")
+        var phone = {model: "iPhone 11", ram: "256GB", colour:"Red"}
+
+        for (p in phone) { // loop thru properties
+            console.log(phone[p]); // correct syntax for accessing obj properties, using variable
+        }
+
+       /*  for (p of phone) { // this is for array
+            console.log(p);
+        } */
+
+        /* for (i=0; i<phone.size(); i++) { // should use phone.length
+            console.log(phone[i]); // phone is not an array
+        } */
+
+        for (p in phone) {
+            console.log(phone.p); // incorrect syntax 
+        }
+
+        // ************************************************
+        console.log("what's the output?")
+        var yummies = ["CharKwayTeow", "TahuGoreng"];
+        yummies.push("HokkienMee"); // ["CharKwayTeow", "TahuGoreng", "HokkienMee"]
+        yummies.unshift("Laksa"); // ["Laksa", "CharKwayTeow", "TahuGoreng", "HokkienMee"]
+        yummies.reverse(); // [ "HokkienMee", "TahuGoreng", "CharKwayTeow",  "Laksa" ]
+        yummies.splice(1, 3, "CarrotCake"); // [ "HokkienMee", "CarrotCake" ]
+        console.log(yummies)
+
+        let n = yummies.slice(2, 4); // slice removes eleemnts from start to end (end not included)  
+        //it does not change the original array. Returns a new array
+
+        console.log(yummies.join(",")); // -> HokkienMee,CarrotCake
+        console.log(n)
+
+        // ************************************************
+        console.log("what's x?")
+        function doMystery(i) {
+            let ans = 0;
+            while (i > 0) {
+                ans = ans * 10 + i % 10 ;
+                console.log(ans)
+                i = Math.floor(i / 10);
+                console.log(i)
+
+            }
+            return ans;
+        }
+        let x = doMystery( 1234 );
+        console.log(x)
+        
+        // ************************************************
+        console.log("What's the result?")
+        // \ is an escape character. Used to escape a subsequent character for security purposes
+        // purpose of escaping is to prevent a special character (e.g. quotes ") 
+        // that has semantic meaning to an interpreter, NOT to have a semantic meaning
+        // i.e., interpret the character literally, without any semantic meaning
+        console.log ("/\\\"Quoted\"\\/"); //refers to https://www.w3schools.com/js/js_strings.asp
+        // ************************************************
+
+    </script>
+
+    <!-- hobbyForm -->
+    <form id="hobby-form" name="hobbyForm" action="#">
+        Name: <input type="text" name="name" id="input-name">
+        <input type="button" value="Submit" onclick="return showData()">
+    </form>
+
+    <script>
+        function showData() {
+            alert(document.forms["hobbyForm"]["name"].value); // select a form by name and its element by name
+            alert(document.forms["hobbyForm"][0].value); // select a form by name and its element by index
+            alert(document.forms["hobbyForm"]["input-name"].value); // select a form by name and its element by id
+            
+            alert(document.forms["hobby-form"]["name"].value   ); // select a form by id and its element by name
+            alert(document.forms["hobby-form"][0].value   ); // select a form by id and its element by index     
+            alert(document.forms["hobby-form"]["input-name"].value   ); // select a form by id and its element by id
+
+            alert(document.forms[0]["input-name"].value   ); // select a form by index and its element by id
+            alert(document.forms[0][0].value); // select a form by index and its element by index
+            alert(document.forms[0]["name"].value   ); // select a form by index and its element by name
+
+            return false;
+        }
+    </script>
+
+    <!-- Fruits -->
+    <p class="fruits">apple</p>
+    <span class="fruits">orange</span>
+    <div class="fruits">pear</div>
+    <div id="fruits">kiwi</div>
+    <script>
+        var fruits = document.getElementsByClassName("fruits");
+        // var fruits = document.getElementsByTagName("div"); // this does not get the desired output
+        for (var fruit of fruits) {
+            document.getElementsByTagName("div")[1].innerHTML += fruit.textContent; // innerHTML, innerText also works
+        }
+    </script>
+
+    <!-- Order of Printing -->
+    <script>
+        console.log("pikachiu");
+        /* The onload event occurs after the element has finished loading. 
+         This can be used with the body element to execute a script after the webpage has completely loaded.
+        */
+        document.body.onload = function() { 
+            console.log("ditto"); 
+        };  
+      
+        console.log("charmander");
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+       <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+        crossorigin="anonymous">
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      
+        <style>
+            /* Set the size of the div element that contains the map */
+            #map {
+                height: 400px;  /* The height is 400 pixels */
+                width: 100%;  /* The width is the width of the web page */
+            }
+                /* Optional: Makes the sample page fill the window. */
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+
+  </head>
+  <body>
+    <h3>My Google Map</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+ 
+    <div class="jumbotron">          
+        <p class="lead text-center">Get Geo Location</p>
+        <form>
+            <div class="form-group">
+                <label for="addr">Enter An Address</label>
+                <input type="text" class="form-control" name="addr" id="addr" placeholder="E.g. Singapore Management University" >
+                <br><button type="button" onclick="getLoc('addr')" class="btn btn-primary">Get Full Address!</button>
+                <button type="button" onclick="getLoc('postcode')" class="btn btn-primary">Get Postal Code!</button>
+                <!-- the following set the lat, lng values to put a marker on the map-->
+                <input type="hidden" id="lat" name="lat" value="1.2973784" />
+                <input type="hidden" id="lng" name="lng" value="103.8495219" />
+            </div>
+            <p id="display" class="lead text-center"></p>   
+        </form>
+    </div>
+
+    <script>
+        // get default lat/lng value defined in hidden input fields
+        var lat = document.getElementById("lat").value
+        var lng = document.getElementById("lng").value
+        var title = "Hello SMU"
+        // Initialize and add the map
+        function initMap() {
+            // default: The location of SIS, SMU
+            lat = parseFloat(lat);
+            lng = parseFloat(lng);
+            // var uluru = {lat: -25.344, lng: 131.036};
+            var loc = {lat: lat, lng: lng};
+
+            // The map, centered at SIS, SMU
+            var map = new google.maps.Map(
+                // play with the zoom value to zoom in or out
+                document.getElementById('map'), {zoom: 14, center: loc});
+            // The marker, positioned at SIS, SMU
+            var marker = new google.maps.Marker({position: loc, map: map, title: title});
+        }
+    </script>
+
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * Async script executes immediately and must be after any DOM elements used in callback.
+    * The key parameter will contain your own API key 
+    * The callback parameter executes the initMap() function
+    -->
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjSY3ikgTC0z54dzgQKq-u05muK7QHKkE&callback=initMap&v=weekly&channel=2"
+    async
+    ></script>
+
+
+    <script>
+   
+        // Async call
+        function getLoc(action) {
+            var addr = encodeURI(document.getElementById("addr").value);
+            console.log(addr);
+            var url = "https://maps.googleapis.com/maps/api/geocode/json";
+            var key = "AIzaSyCjSY3ikgTC0z54dzgQKq-u05muK7QHKkE"
+            
+            axios.get(url, {
+                        params: {
+                            address : addr,
+                            key : key
+                        }
+                    })
+                    .then(response =>  {
+                        let data = response.data
+                        console.log(data);
+
+                        let info = '';
+                        if (action == 'postcode') {
+                            // display postal code, given an address
+                            info = getPostCode(data);
+                        } else {
+                            // display full address, given post code or partial addr
+                            info = getFullAddress(data);
+                        }
+                        console.log(info);
+                        
+                        document.getElementById("display").innerText = info;
+                        // refresh the hidden input values with new lat lng coordinates
+                        let coordinate = getLatLng(data);
+                        lat = coordinate["lat"];
+                        lng = coordinate["lng"];
+                        title = "Hello " + addr
+                        // now refresh the map
+                        initMap();
+                    })
+                    .catch(error => {
+                        // not a good idea to directly show err.message 
+                        // as it may contain sensitive info
+                        // document.getElementById("display").innerText = error.message;
+                        // show a predefined error message string
+                        document.getElementById("display").innerText = "Sorry, invalid address. Please try again!";
+                    }); 
+        }
+
+        function getFullAddress (data) {
+            var addr = data["results"][0]["formatted_address"];
+            var loc = getLatLng(data);
+            return addr + ", lat: " + loc["lat"] + ", lng: " + loc["lng"];
+        }
+
+        function getLatLng(data) {
+            var location= data["results"][0]["geometry"]["location"];
+            return location; 
+        }
+
+        function getPostCode(data) {
+            var addrcomponents = data["results"][0]["address_components"];
+            var postcode = addrcomponents.filter(postcodeHelper);
+            // country is an array but there should be only one element
+            return postcode[0]["long_name"];
+        }
+
+        function postcodeHelper(addr) {  
+            return addr["types"][0] == "postal_code" ;
+        }
+
+
+        function getKeys(data){
+            // data["results"][0] is an object
+            // this gets the keys/properties of results[0] object
+            var keys = Object.keys(data["results"][0]);
+            for (key of keys) {
+                // this prints --
+                /*  address_components
+                    formatted_address
+                    geometry
+                    place_id
+                    plus_code
+                    types */
+                document.getElementById("display").innerHTML += key + "<br>";
+            }
+        }
+
+        function getCountry(data) {
+            // this is an array
+            var addrcomponents = data["results"][0]["address_components"];
+            // The filter() method creates a new array with array elements that passes a test.
+            var country = addrcomponents.filter(countryHelper);
+            // country is an array but there should be only one element
+            return country[0]["long_name"];
+        }
+
+        function countryHelper(addr, index) {  
+            return addr["types"][0] == "country" ;
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+    crossorigin="anonymous"></script>
+
+</body>
+</html>

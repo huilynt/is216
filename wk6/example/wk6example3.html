@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Axios : POST with Params
+    </title>
+     <!-- Bootstrap CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+     integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+     crossorigin="anonymous">
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <p id="axios">Let Axios change this text</p>
+        <button type="button" onclick="addPost()">Click Me!</button>
+    </div>
+
+    <script>
+        function addPost() {
+            //const url = 'http://jsonplaceholder.typicode.com/todos'
+            //const data = { userId: '1', completed: false}
+            //const data = { completed: false}
+            //const url = 'http://localhost/is216/REST/blog/addPost.php'
+            //const data = { subject: 'Weather', entry: 'Cloudy but nice', mood: 'Happy'}
+
+            types = ['customers', 'suppliers'];
+            const url = 'http://localhost/is216/wk6/example/getPost.php'
+            const data = { type: types[1], limit: 3}
+
+            axios.post(url, data)
+            .then(response =>  {
+                console.log(response.status);
+                console.log(response.data);
+                
+                let data = response.data.records;
+
+                let output = "<table class='table table-dark'>"
+                data.forEach(
+                    element => output +="<tr><td>" + element.name + "</td><td>" + 
+                        element.age + "</td><td>" + element.city + "</td><td></tr>"
+                )
+                output += "</table>"
+                document.getElementById("axios").innerHTML = output;
+            })
+            .catch(error => {
+                console.log(error.message)
+                document.getElementById("axios").innerText = error.message;
+            });   
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+
+<head>
+    <title>Weather forecast 2-Hourly</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous">
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+</head>
+
+<body>
+    <div class='container'>
+        <div class="row">
+            <div class="col">
+                <nav class="navbar navbar-expand-sm bg-light">
+
+                    <!-- Links -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href='forecast2hourly.html'>2-hourly</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href='forecast24.html'>24-hour</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href='forecast4days.html'>4-days</a>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+
+                <h2 id="heading"></h2>
+
+
+                <table class="table table-bordered table-striped text-center">
+                    <thead>
+                        <tr id='thead-tr'>
+                            <th scope="col">Area</th>
+                        </tr>
+                    </thead>
+                    <tbody id='tbody'>
+
+                    </tbody>
+                </table>
+
+                <p id="output"></p>
+            </div> <!-- col -->
+        </div> <!-- row -->
+
+    </div>
+
+    <script src="script.js"></script>
+
+    <script>
+
+        now = new Date();
+
+        var nowStr = now.toISOString();
+        nowDate = nowStr.slice(0, 10);
+
+        let headerText = document.createTextNode('2-Hourly dated ' + nowDate);
+        document.getElementById("heading").appendChild(headerText);
+
+        axios.get("https://api.data.gov.sg/v1/environment/2-hour-weather-forecast?data="
+            + encodeURIComponent(nowDate)
+        )
+            .then(response => {
+                var obj = response.data;
+
+
+                // header row
+                let thead_rows = document.getElementById("thead-tr");
+
+                // convert the response to area - [ forecasts... ]
+                let area_forecasts = {};
+                let prev_start = "";
+                for (item of obj.items) {
+                    var valid_period = item.valid_period;
+
+                    // header row
+                    let cur_start = getTimePart(valid_period.start);
+                    // there are multiple forecasts at the start time slots
+                    if (cur_start != prev_start) {
+
+                        let th = document.createElement('th');
+                        th.scope = 'col';
+                        let text = document.createTextNode(cur_start
+                            + "-" + getTimePart(valid_period.end));
+                        th.appendChild(text);
+                        thead_rows.appendChild(th);
+                    }
+
+                    // convert the response to area - [ forecasts... ]
+                    var forecasts = item.forecasts;
+                    for (forecast of forecasts) {
+                        let area = forecast.area;
+                        if (!area_forecasts.hasOwnProperty(area)) {
+                            area_forecasts[area] = [];
+                        }
+
+                        // there are multiple forecasts at the start time slots
+                        // take the last one
+                        if (cur_start != prev_start) {
+                            area_forecasts[area].push(forecast.forecast);
+                        } else {
+                            let last = area_forecasts[area].length - 1;
+                            area_forecasts[area][last] = forecast.forecast;
+                        }
+                    }
+
+                    // there are multiple forecasts at the start time slots
+                    prev_start = cur_start;
+
+                }
+
+
+                // content rows
+                let tbody = document.getElementById("tbody");
+
+                // for each row: location, the forecasts 
+                for (area in area_forecasts) {
+
+                    let tr = document.createElement('tr');
+                    tbody.appendChild(tr);
+
+                    // column 1 - area label
+                    let th = document.createElement('th');
+                    th.setAttribute('scope', 'col');
+                    th.textContent = area;
+                    tr.appendChild(th);
+
+
+                    let colspan = 1;
+                    let forecast_arr = area_forecasts[area];
+                    let len = forecast_arr.length;
+                    for (i = 0; i < len; i++) {
+                        let forecast = forecast_arr[i];
+
+                        // There are "Partly Cloudy (Day)" and "Partly Cloudy (Night)" 
+                        // but the day and night does not seem correct.
+                        if (forecast.includes("Partly Cloudy")) {
+                            forecast = "Partly Cloudy";
+                        }
+
+                        if (i == (len - 1) || !forecast_arr[i + 1].includes(forecast)) {
+                            let td = document.createElement('td');
+                            td.setAttribute('colspan', colspan);
+                            td.appendChild(document.createTextNode(forecast));
+                            tr.appendChild(td)
+
+                            colspan = 1;
+                        } else {
+                            colspan++;
+                        }
+                    }
+
+                }
+            })
+            .catch(error => {
+                document.getElementById("output").innerText = 'HTTP Error ' + error;
+
+            })
+
+    </script>
+
+
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

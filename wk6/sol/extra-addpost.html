@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+    crossorigin="anonymous">
+    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+    <div id="app" class="table m-2"> 
+        <h3>Add a New Blog Post</h3>
+    
+        Subject: <input type='text' size='30' id='subject' required>
+        <br>
+    
+        Entry: <br>
+        <textarea name='entry' cols='80' rows='5' id='entry' required></textarea>
+        <br>
+    
+        Mood:
+            <select id='mood' name='mood'>
+                <option value='Happy'>Happy</option>
+                <option value='Sad'>Sad</option>
+                <option value='Angry'>Angry</option>
+            </select>
+        <br>
+    
+        <br>
+        <button onclick="add()">Submit New Post</button>
+        <p id='status'></p>
+       
+        <hr>
+        Click <a href='http://localhost/is216/REST/blog/display.php'>here</a> to return to Main Page
+    </div>
+
+    <script>
+        function add() {
+            var subject = document.getElementById("subject").value
+            var entry = document.getElementById("entry").value
+            var mood = document.getElementById("mood").value
+            console.log(subject)
+            console.log(entry)
+            console.log(mood)
+           
+            axios.get('http://localhost/is216/REST/blog/addPost.php', {
+                params: {
+                    subject: subject,
+                    entry: entry,
+                    mood: mood
+                }
+            })
+            .then(response => {
+                console.log(response.data)
+                document.getElementById('status').innerText = response.data.status
+            })
+            .catch(error => {
+                document.getElementById('status').innerText = error.message 
+            }) 
+
+        }
+           
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+    crossorigin="anonymous"></script>
+
+</body>
+</html>

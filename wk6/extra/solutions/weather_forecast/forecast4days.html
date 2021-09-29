@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+
+<head>
+    <title>Weather forecast - 4 days</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous">
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+</head>
+
+<body>
+    <div class='container'>
+        <div class="row">
+            <div class="col">
+                <nav class="navbar navbar-expand-sm bg-light">
+
+                    <!-- Links -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href='forecast2hourly.html'>2-hourly</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href='forecast24.html'>24-hour</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href='forecast4days.html'>4-days</a>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>4-days</h2>
+
+                <table class='table table-bordered table-striped text-center'>
+                    <thead>
+                        <tr>
+                            <th scope="col" rowspan='2'>Date</th>
+                            <th scope="col" rowspan='2'>Forecast</th>
+                            <th scope="col" colspan='2'>Temperature</th>
+                            <th scope="col" colspan='2'>Humid</th>
+                            <th scope="col" colspan='3'>Wind</th>
+                        </tr>
+                        <tr>
+                            <td>Low</td>
+                            <td>High</td>
+                            <td>Low</td>
+                            <td>High</td>
+                            <td>Direction</td>
+                            <td>Low</td>
+                            <td>High</td>
+                        </tr>
+                    </thead>
+                    <tbody id='tbody'>
+                    </tbody>
+                </table>
+
+                <p id="output"></p>
+            </div> <!-- col -->
+        </div> <!-- row -->
+
+    </div>
+
+    <script src="script.js"></script>
+
+    <script>
+
+        now = new Date();
+
+        var nowStr = now.toISOString();
+        nowDate = nowStr.slice(0, 10);
+
+
+
+        axios.get("https://api.data.gov.sg/v1/environment/4-day-weather-forecast?date="
+            + encodeURIComponent(nowDate)
+        )
+            .then(response => {
+                var obj = response.data;
+
+                // use the latest update
+                let latestUpdate = obj.items[obj.items.length - 1];
+
+
+                let tbody = document.getElementById("tbody");
+
+                for (forecast of latestUpdate.forecasts) {
+
+                    let tr = document.createElement('tr');
+                    tbody.appendChild(tr);
+
+                    let th = document.createElement('th');
+                    th.scope = 'row';
+                    let text = document.createTextNode(forecast.date);
+                    th.appendChild(text)
+                    tr.appendChild(th);
+
+                    tr.appendChild(createTD(forecast.forecast));
+                    tr.appendChild(createTD(forecast.temperature.low));
+                    tr.appendChild(createTD(forecast.temperature.high));
+                    tr.appendChild(createTD(forecast.relative_humidity.low));
+                    tr.appendChild(createTD(forecast.relative_humidity.high));
+                    tr.appendChild(createTD(forecast.wind.direction));
+                    tr.appendChild(createTD(forecast.wind.speed.low));
+                    tr.appendChild(createTD(forecast.wind.speed.high));
+
+                }
+
+            })
+            .catch(error => {
+                document.getElementById("output").innerText = 'HTTP Error ' + error;
+
+            })
+    </script>
+
+
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

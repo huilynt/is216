@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Axios : GET with Params
+    </title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <p id="axios">Let Axios change this text</p>
+        <button type="button" onclick="getData()">Click Me!</button>
+    </div>
+
+    <script>
+        function getData() {
+            const url = 'http://api.openweathermap.org/data/2.5/weather'
+            var query = 'Singapore,sg'
+            var key = 'YOUR OWN API KEY'
+
+            axios.get(url, {
+                    params: {
+                        q : query,
+                        APPID : key
+                    }
+            })
+            .then(response =>  {
+                console.log(response.data)
+                const weather = response.data.weather[0].description
+                document.getElementById("axios").innerText = weather;
+            })
+            .catch(error => {
+                console.log(error.message)
+                document.getElementById("axios").innerText = error.message;
+            });   
+        }
+    </script>
+</body>
+
+</html>

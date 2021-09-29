@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+<body>
+
+<div id="app" class="table m-2"> 
+  <h3>User Registration</h3>
+
+  User ID: <input id="id" type='text' size='30' required>  
+  <button onclick="checkIfUserExists(document.getElementById('id').value)">Available?</button>
+
+  <br>
+
+  User Name: <input id="name" type='text' size='30' required>
+  <br>
+
+  Email: <input id="email" type='text' size='30' required>
+  <br>
+  
+  <br>
+  
+  <button onclick="register()">Register</button> 
+  <button onclick="deregister(document.getElementById('id').value)">De-Register</button> 
+  <button onclick="updateEmail()">Update Email</button> 
+  
+  <p id="status"></p>
+  <p id="latest"></p>
+  <p>Total number of registered users <span id='total'>0</span>.</p>
+</div>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script> 
+<!-- This is the API from Firebase Realtime Database -->
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script> 
+
+<script>
+  // Your web app's Firebase configuration
+  // You can find yours at Firebase -> Project Overview -> Project Settings
+  // -> SDK setup and configuration -> CDN
+  const firebaseConfig = {
+  apiKey: "AIzaSyDwvgaXWFbSAu3Dusp6rLhIhkprZ1H0dIk",
+  authDomain: "is216-blog.firebaseapp.com",
+  databaseURL: "https://is216-blog-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "is216-blog",
+  storageBucket: "is216-blog.appspot.com",
+  messagingSenderId: "645294461363",
+  appId: "1:645294461363:web:6a928ebc52cdef76c8fbc6"
+};
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  var users = firebase.database().ref('users');
+  users.on('child_added', (snapshot) =>{
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = mm + '/' + dd + '/' + yyyy;
+    document.getElementById("latest").innerText = "Last user registered at " + today;
+  });
+
+  var count = firebase.database().ref('total');
+  count.on('value', (snapshot) => {
+    if(snapshot.exists()) {
+      var tt = snapshot.val();
+      document.getElementById("total").innerText = tt;
+    }
+  });
+
+//The following example demostrates how to read data
+function checkIfUserExists(userId) {
+  var user = firebase.database().ref('users/' + userId);
+  user.once('value').then((snapshot) => {
+    if(snapshot.exists()) {
+      document.getElementById("status").innerText = "User ID has already been taken.";
+    }
+    else {
+      document.getElementById("status").innerText = "User ID is available.";
+    }
+  });
+}
+
+//The following example demostrates how to add data
+function register() {
+  var userId = document.getElementById("id").value;
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  writeUserDataWithCompletion(userId,name,email);
+}
+
+//The following writes the data
+function writeUserDataWithCompletion(userId, name, email) {
+  firebase.database().ref('users/' + userId).set({
+    username: name,
+    email: email
+  }, function(error) {
+    if (error) {
+      document.getElementById("status").innerText = "User Registration Failed!";
+    } else {
+      document.getElementById("status").innerText = "User Registration Done!";
+      firebase.database().ref('total').set(parseInt(document.getElementById('total').innerText) + 1); 
+    }
+  });
+}
+
+//The following example demostrates how to delete data
+function deregister(userId) {
+  firebase.database().ref('users/' + userId).remove()
+  .then(function() {
+    document.getElementById("status").innerText = "Remove succeeded.";
+    firebase.database().ref('total').set(parseInt(document.getElementById('total').innerText) - 1); 
+  })
+  .catch(function(error) {
+    document.getElementById("status").innerText = "Remove Failed.";
+  });
+}
+
+function updateEmail() {
+  var userId = document.getElementById("id").value;
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  var updates = {};
+  updates['/users/' + userId + "/" + 'name'] = name;
+  updates['/users/' + userId + "/" + 'email'] = email;
+  firebase.database().ref().update(updates);
+}
+
+</script>
+</body>
+</html>

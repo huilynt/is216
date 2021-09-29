@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+
+<head>
+    <title>Weather forecast - 24 hour</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous">
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+</head>
+
+<body>
+    <div class='container'>
+        <div class="row">
+            <div class="col">
+                <nav class="navbar navbar-expand-sm bg-light">
+
+                    <!-- Links -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href='forecast2hourly.html'>2-hourly</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href='forecast24.html'>24-hour</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href='forecast4days.html'>4-days</a>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2 id="heading">24-hour dated </h2>
+                <h2 id="forecast"></h2>
+
+                <table class='table table-bordered'>
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Low</th>
+                            <th scope="col">High</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope='row'>Temperature</th>
+                            <td id='temperature-low'></td>
+                            <td id='temperature-high'></td>
+                        </tr>
+                        <tr>
+                            <th scope='row'>Humid</th>
+                            <td id='humid-low'></td>
+                            <td id='humid-high'></td>
+                        </tr>
+                        <tr>
+                            <th scope='row' id='wind'>Wind Speed</th>
+                            <td id='wind-low'></td>
+                            <td id='wind-high'></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <table class='table table-bordered'>
+                    <thead>
+                        <th scope="col">Start</th>
+                        <th scope="col">End</th>
+                        <th scope="col">North</th>
+                        <th scope="col">South</th>
+                        <th scope="col">East</th>
+                        <th scope="col">West</th>
+                        <th scope="col">Central</th>
+                    </thead>
+                    <tbody id='periods'></tbody>
+                </table>
+
+
+                <p id="output"></p>
+            </div> <!-- col -->
+        </div> <!-- row -->
+
+    </div>
+
+
+    <script src="script.js"></script>
+    <script>
+
+        now = new Date();
+
+        var nowStr = now.toISOString();
+        nowDate = nowStr.slice(0, 10);
+
+
+        axios.get("https://api.data.gov.sg/v1/environment/24-hour-weather-forecast?date="
+            + encodeURIComponent(nowDate)
+        )
+            .then(response => {
+                var obj = response.data;
+
+                // use the latest update
+                let latestUpdate = obj.items[obj.items.length - 1];
+
+                let general = latestUpdate.general;
+
+                document.getElementById("heading").innerText +=
+                    " " + nowDate + " " + getTimePart(latestUpdate.timestamp) + "H";
+
+                document.getElementById("forecast").innerText = general.forecast;
+
+                document.getElementById("humid-low").innerText = general.relative_humidity.low;
+                document.getElementById("humid-high").innerText = general.relative_humidity.high;
+
+                document.getElementById("temperature-low").innerText = general.temperature.low;
+                document.getElementById("temperature-high").innerText = general.temperature.high;
+
+                document.getElementById("wind").innerText += " (" + general.wind.direction + ")";
+                document.getElementById("wind-low").innerText = general.wind.speed.low;
+                document.getElementById("wind-high").innerText = general.wind.speed.high;
+
+
+                let periods = latestUpdate.periods;
+                let period_tbody = document.getElementById("periods");
+
+                for (period of periods) {
+                    let tr = document.createElement('tr');
+                    period_tbody.appendChild(tr);
+
+                    let th = document.createElement('th');
+                    th.scope = 'row';
+                    let text = document.createTextNode(period.time.start);
+                    th.appendChild(text)
+                    tr.appendChild(th);
+
+                    th = document.createElement('th');
+                    th.scope = 'row';
+                    text = document.createTextNode(period.time.end);
+                    th.appendChild(text)
+                    tr.appendChild(th);
+
+                    tr.appendChild(createTD(period.regions.north));
+                    tr.appendChild(createTD(period.regions.south));
+                    tr.appendChild(createTD(period.regions.east));
+                    tr.appendChild(createTD(period.regions.west));
+                    tr.appendChild(createTD(period.regions.central));
+                }
+
+            })
+            .catch(error => {
+                document.getElementById("output").innerText = 'HTTP Error ' + error;
+
+            })
+
+    </script>
+
+
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

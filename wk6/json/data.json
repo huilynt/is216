@@ -1,0 +1,56 @@
+{
+  "response": {
+    "numFound": 49,
+    "start": 0,
+    "docs": [
+      {
+        "description": "MANGA: The Salary Man & Tofu the Funny Cat",
+        "identifier": "manga_The_Salary_Man_Tofu_the_Funny_Cat",
+        "mediatype": "texts",
+        "title": "MANGA: The Salary Man & Tofu the Funny Cat"
+      },
+      {
+        "description": "Funny Cat",
+        "identifier": "pisica",
+        "mediatype": "movies",
+        "title": "pisica",
+        "year": "2019"
+      },
+      {
+        "description": "funny cat",
+        "identifier": "BeautifulKittenMeowingHermosoGatitoMaullandoAdorableCute",
+        "mediatype": "movies",
+        "title": "Beautiful Kitten Meowing Hermoso Gatito Maullando Adorable Cute"
+      },
+      {
+        "description": "Funny cat",
+        "identifier": "IMG0254",
+        "mediatype": "movies",
+        "title": "IMG 0254",
+        "year": "2013"
+      },
+      {
+        "description": [
+          "24 unnumbered pages : 23 cm",
+          "This rebus book is about Otto, a funny cat",
+          "\"Ages 3-5\"--Cover",
+          "Includes 24 flash cards",
+          "\"Ages 3-5\"--Cover",
+          "This rebus book is about Otto, a funny cat"
+        ]
+      }
+    ]
+  },
+  "responseHeader": {
+    "status": 0,
+    "QTime": 62,
+    "params": {
+      "query": "description:\"funny cat\" OR title:\"funny cat\"",
+      "qin": "description:\"funny cat\" OR title:\"funny cat\"",
+      "fields": "identifier,title,description,mediatype,year",
+      "wt": "json",
+      "rows": "5",
+      "start": 0
+    }
+  }
+}

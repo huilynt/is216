@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IS216 Revision II - Bootstrap</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+    crossorigin="anonymous">
+</head>
+<body>
+
+    <!-- 
+        Add Bootstrap code such that 
+        Task1: the header <h1> element is in the center of the browser window and the text color is red-ish
+
+        Task2: the space between the browser top bar and the header <h1> element must be 48px
+          pt-5 = 3 rem = 3 * default font size (16px)
+        
+        Task3: 
+        
+            Add Bootstrap Carousel Component such that it looks like the figure shown in fig1.png
+                Use ballon1.png and ballon2.png for the carousel on the left
+                Use ballon3.png and ballon4.png for the carousel on the right
+
+            Use Bootstrap grid system so that when the browser window (viewpoint) is smaller than small breakpoint, 
+                the two carousels stack up vertically
+        
+    -->
+
+    <div class="container">
+      <div class="row">
+        <h1 class="col text-center text-danger pt-5">Hello Ballons Again!!!</h1>
+      </div>
+     
+      <div class="row">
+          <div id="carouselExampleSlidesOnly" class="col-sm carousel slide border" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="./resources/ballon1.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="./resources/ballon2.png" class="d-block w-100" alt="...">
+                </div>
+              </div>
+          </div>
+
+          <div id="carouselExampleSlidesOnly" class="col-sm carousel slide border" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="./resources/ballon3.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="./resources/ballon4.png" class="d-block w-100" alt="...">
+                </div>
+              </div>
+          </div>
+
+      </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+    crossorigin="anonymous"></script>
+</body>
+</html>

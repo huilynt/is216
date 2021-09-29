@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Internet Archive Search</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+        crossorigin="anonymous">
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+    <style>
+        .collapsible {
+            color: blue;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- START -->
+
+    <div class='container'>
+
+        <div class='row'>
+            <div class='col' data-toggle="tooltip" data-placement="right"
+                title="Search in title and description">
+                <h1>Search Internet Archive</h1>
+                <p>
+                    <label for="query">Search </label>
+                    <input type="text" id='query' value="funny cat">
+                    <input type="button" value='GO!' onclick='doSearch();'>
+                </p>
+
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class='col'>
+                <div id="search-results" class="d-none">
+                    <p id='num-found'></p>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope='col' class='w-25'>Title (Year)</th>
+                                <th scope='col'>Media</th>
+                                <th scope='col'>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody id='tbody'></tbody>
+                    </table>
+
+                </div>
+
+                <p id='output'></p>
+
+            </div>
+        </div>
+    </div>
+    <pre id='output'></pre>
+    <script>
+
+        function doSearch() {
+            query = document.getElementById("query").value;
+
+            axios.get('https://archive.org/advancedsearch.php?fl[]=identifier&fl[]=title&fl[]=description&fl[]=mediatype&fl[]=year&output=json'
+                + '&q=description:"' + encodeURIComponent(query)
+                + '" OR title:"' + encodeURIComponent(query) + '"')
+                .then(response => {
+                    document.getElementById("search-results").setAttribute("class", "d-inline");
+                    var obj = response.data;
+
+                    document.getElementById("num-found").innerText = obj.response.numFound + " results found.";
+
+                    // Link to view the document:  https://archive.org/details/<identifier>  
+
+                    /* START */
+                    let tbody = document.getElementById("tbody");
+
+                    // clear any previous results
+                    tbody.innerHTML = '';
+
+                    for (doc of obj.response.docs) {
+                        let desc = "";
+                        if (doc.hasOwnProperty("description")) {
+                            desc = doc.description;
+                            if (Array.isArray(desc)) {
+                                desc = desc.join("\n");
+                            }
+                            desc = desc.trim();
+                        }
+
+                        let tr = document.createElement('tr');
+                        tbody.appendChild(tr);
+
+                        let td = document.createElement('td');
+                        tr.appendChild(td);
+
+                        let anchor = document.createElement('a');
+                        anchor.href = "https://archive.org/details/" + doc.identifier;
+                        anchor.target = "_blank";
+                        let text = doc.title
+                            + (doc.hasOwnProperty("year") ? " (" + doc.year + ")" : "");
+                        anchor.appendChild(document.createTextNode(text));
+                        anchor.appendChild(document.createElement('br'));
+
+                        td.appendChild(anchor);
+                        td.appendChild(document.createElement('br'));
+
+                        td = document.createElement('td');
+                        td.textContent = doc.mediatype;
+                        tr.appendChild(td);
+
+                        td = document.createElement('td');
+                        if (desc.length > 100) { // if short has "..." at the end.                                
+
+                            let span = document.createElement('span');
+                            span.id = "span" + doc.identifier;
+                            span.className = "collapsible";
+                            span.addEventListener('click', toggle);
+                            span.textContent = '[+]';
+
+                            td.appendChild(span);
+
+                            // short
+                            let shortspan = document.createElement('span');
+                            shortspan.id = doc.identifier + "-short";
+                            shortspan.className = "d-inline";
+                            shortspan.textContent = desc.slice(0, 96) + "... ";
+
+                            td.appendChild(shortspan);
+
+                            // long
+                            let longspan = document.createElement('span');
+                            longspan.id = doc.identifier + "-long";
+                            longspan.className = "d-none";
+                            longspan.innerHTML = desc.replace("\n", "<br>");
+
+                            td.appendChild(longspan);
+
+                        } else {
+                            td.textContent = desc;
+                        }
+                        tr.appendChild(td);
+
+
+                    }
+
+                    /* END */
+                })
+                .catch(error => {
+                    document.getElementById("output").innerHTML = "Error: HTTP status=" + error;
+                });
+
+        } // doSearch
+
+
+        function toggle() {
+            let link = event.target;
+            let identifier = link.id.substring(4); // remove prefix "span"
+
+            if (link.innerText == "[+]") {
+                document.getElementById(identifier + '-short').className = "d-none";
+                document.getElementById(identifier + '-long').className = "d-inline";
+                link.innerText = "[-]";
+
+            } else {
+                document.getElementById(identifier + '-short').className = "d-inline";
+                document.getElementById(identifier + '-long').className = "d-none";
+                link.innerText = "[+]";
+            }
+        }
+    </script>
+
+
+
+
+    <!-- END -->
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

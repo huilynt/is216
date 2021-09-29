@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+        crossorigin="anonymous">
+        
+         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row m-2">
+                <div class="col bg-light">
+                    <p>Type a name in the input field below:</p>
+                    <form>
+                        Name: <input type="text" id="name">
+                    </form>
+                    <p>Suggestions: <span id="txtHint"></span></p>
+                </div>
+            </div>
+           
+        </div>
+
+        <script>
+            var inputElem = document.getElementById("name");
+            inputElem.addEventListener("keyup", showHint);
+
+            function showHint() {
+                
+
+                var q = event.target.value;
+                if(q == '') {
+                    document.getElementById("txtHint").innerText = "";
+                } else {
+                    var url = "http://localhost/is216/wk6/sol/ex1/getHint.php"
+                    
+                    axios.get(url, {
+                        params: {
+                            query: q
+                        }
+                    })
+                    .then(response =>  {
+                        console.log(response.data)
+                        document.getElementById("txtHint").innerText = response.data;
+                    })
+                    .catch(error => {
+                        console.log(error.message)
+                        document.getElementById("txtHint").innerText = error.message;
+                    }); 
+                }
+            }
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+        crossorigin="anonymous"></script>
+    </body>
+</html>
