@@ -1,0 +1,42 @@
+/* DO NOT MODIFY THE BELOW CSS STYLING */
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* YOU MAY MODIFY THIS */
+#grid {
+    border: 1px solid grey;
+    width: 400px;
+    height: 400px;
+    background-color: yellow;
+    margin: auto;
+}
+
+
+/* YOU MAY MODIFY THIS */
+#message {
+    font-size: 15px;
+    text-align: right;
+    height: 40px;
+    color: white;
+}
+
+
+/* YOU MAY MODIFY THIS */
+#current-equation {
+    font-size: 20px;
+    text-align: right;
+    height: 40px;
+    color: white;
+}
+
+
+/* YOU MAY MODIFY THIS */
+.key {
+    border: 2px solid pink;
+    font-size: 26px;
+    height: 64px;
+}
+
+
+/* YOU MAY ADD MORE CSS STYLING ANYWHERE IN THIS FILE */

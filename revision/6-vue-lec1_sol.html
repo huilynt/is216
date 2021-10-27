@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Lecture - Part I</title>
+
+     <!-- Bootstrap CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+     integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+     crossorigin="anonymous">
+
+    <!-- VueJS -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <style>
+        body {
+            width: 100%;
+            text-align: center;
+        }
+
+        .male {
+            background-color: rgb(135, 163, 161);
+            
+        }
+
+        .female {
+            background-color: pink;
+            
+        }
+        .center {
+            margin: 20px auto;
+            display: block;  
+        }
+    </style>
+
+    <script>
+        /*
+            1. Install Vue extension: Vetur -- for auto-completion, Syntax-highlighting, Error Checking, etc.
+            2. Documentation -- https://v3.vuejs.org/
+            3. Importing Vue library from CDN
+            
+            4. Creating a Vue instance. 
+                Syntax:
+                    Vue.createApp( options ).mount('#app')
+                    
+                    options is an object containing 
+                        properties such as data, methods, mounted, computed
+                    
+                    [Vue instance is linked (mounted) to DOM element with id 'app']
+
+            5. Data binding -- for reactive updates -- when data changes, DOM changes
+                    property interpolation
+                    method interpolation 
+                    JS expression
+
+            [ Directives are special attributes reactively apply effects
+                to the DOM when the value of its expression changes ]
+
+            6. v-bind - bind an attribute value with a vue property
+                <img v-bind:src="myImg">
+
+            7. v-html - for displaying HTML content of a vue property
+                <div v-html="message"></div>
+
+            8. v-if - for conditionally rendering/displaying an element
+                <div v-if="1==1">Show this</div>
+                <div v-else>or this!</div>
+
+            9. v-on - event listening and handling, passing parameters
+                <button v-on:click="counter+1">Add</button>
+                
+            10. class and style bindings - 
+                v-bind:class='classProp'
+                v-bind:class = "[classProp, anotherClassProp]"
+                v-bind:class="{'classProp' : isActive}" 
+                v-bind:style="{'property':value}"
+        */ 
+    </script>
+</head>
+<body>
+
+    <div class="app">
+        <!-- all the HTML content here
+        can be controlled by the Vue instance-->
+        <h1>Random User Generator</h1>
+        <div :class="gender">
+            <img v-bind:src='picture' :alt='firstName'>
+            <p v-bind:style="{'font-family':font, 'font-size': size}"> 
+                <span v-if="gender=='male'">Mr </span> 
+                <span v-else>Miss </span>  <!-- v-else-if -->
+                {{ firstName + " " + lastName.toUpperCase() }}
+            </p>
+            <p>Email: {{ email }}</p>
+            <a :href='links[index]' target="_blank" v-html="text"></a>
+
+            <!-- instead of v-on:click='getUser()', this also can:  v-on:click='getUser' -->
+            <button v-on:click='getUser()' :class='[btn, display]'>Generate Random User</button>
+
+           
+            <h3>Modify Info below</h3>
+            <span>Change email: </span><input type="text" name="email" v-model="email">
+            <span>Change university: </span>
+            <select name="uni" v-model='index' v-on:change='test'>
+                <option value="0">SMU</option>
+                <option value="1">NTU</option>
+                <option value="2">NUS</option>
+                <option value="3">SIT</option>
+            </select>
+           
+        </div>
+    </div>
+
+    <div class="app">
+        <!-- all the HTML content here
+        can be controlled by the Vue instance-->
+        <h1>Random User Generator</h1>
+        <div :class="gender">
+            <img v-bind:src='picture' :alt='firstName'>
+            <p v-bind:style="{'font-family':font, 'font-size': size}"> 
+                <span v-if="gender=='male'">Mr </span> 
+                <span v-else>Miss </span>  <!-- v-else-if -->
+                {{ firstName + " " + lastName.toUpperCase() }}
+            </p>
+            <p>Email: {{ email }}</p>
+            <a :href='links[index]' target="_blank" v-html="text"></a>
+
+            <!-- instead of v-on:click='getUser()', this also can:  v-on:click='getUser' -->
+            <button v-on:click='getUser()' :class='[btn, display]'>Generate Random User</button>
+
+           
+            <h3>Modify Info below</h3>
+            <span>Change email: </span><input type="text" name="email" v-model="email">
+            <span>Change university: </span>
+            <select name="uni" v-model='index' v-on:change='test'>
+                <option value="0">SMU</option>
+                <option value="1">NTU</option>
+                <option value="2">NUS</option>
+                <option value="3">SIT</option>
+            </select>
+           
+        </div>
+    </div>
+
+    <script>
+        // Vue instance example (simply a Javascript object)
+        const app = Vue.createApp( {
+            data() {
+                return {
+                    btn: 'btn-primary',
+                    display: 'center',
+                    size: "2em",
+                    font: "'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif",
+                    text: "<span style='color:black;'>Go to my university</span>",
+                    firstName: 'Lwin Khin',
+                    lastName: 'Shar',
+                    email: 'lkshar@email.com',
+                    gender: 'male',
+                    picture: 'https://randomuser.me/api/portraits/men/10.jpg',
+                    url: 'https://randomuser.me/api',
+                    index: 0,
+                    links: ['https://www.smu.edu.sg/',
+                            'https://www.ntu.edu.sg/Pages/home.aspx', 
+                            'http://nus.edu.sg/', 'https://www.singaporetech.edu.sg/']  
+                }
+            },
+            methods: {
+                getUser() {
+                    //console.log(this.firstName)
+                    axios.get('https://randomuser.me/api')
+                    .then(response =>  {
+                        console.log(response.data)
+                        this.firstName = response.data.results[0].name.first
+                        this.lastName = response.data.results[0].name.last
+                        this.email = response.data.results[0].email
+                        this.gender = response.data.results[0].gender
+                        this.picture = response.data.results[0].picture.large
+                        var str = response.data.results[0].name.first
+                        this.test(str) // test asynchronous-ness
+                    })
+                    .catch(error => {
+                        console.log(error.message)
+                    })  
+                },
+                test() {
+                    console.log(typeof this.index)
+                    console.log(this.links[this.index])
+                }
+            }
+        })
+
+        const vm = app.mount('.app')
+
+    </script>
+
+    <hr>
+    <!-- reactive DOM -->
+    <div id="app2">
+        <h3 v-if="getPhone() != ''"> Phone : {{ getPhone() }}  </h3>   
+        <h3 v-else>No name</h3>
+
+        {{ 'Mr ' + name }} <br>
+        One plus two = {{ 1 + 2 }} <br>
+        Uppercase: {{ name.toUpperCase() }} <br>
+
+        <div class="green-box blue-box">
+        boxes
+        
+        </div>
+
+        <div v-on:mouseover="isGreen=true" class="blue-box green-box" v-bind:class="{'green-box': isGreen}">
+            Hello....
+            <!-- <img src="./img/cat1.jpg" class='w-25'> -->
+        </div>
+        <br>
+
+        <p v-bind:style="{'font-size':size}">Select your preference: </p>
+        Green Box: <input type="checkbox" v-model='isGreen' name="pref">
+        <br><br>
+
+        <input v-model="name" v-bind:placeholder="name">
+        <input v-model="name" v-bind:placeholder="name">
+    
+        <br><br>
+
+        <a :href='links[1]' target="_blank">Go to my university</a>
+
+        <button type="button" v-on:click="toggle" class="btn" 
+            v-bind:class="{'btn-primary' : isPrimary, 'btn-secondary' : isSecondary}">Click me!</button>
+
+        <button type="button" v-on:click="counter++" class="btn btn-primary">{{ counter }}</button>
+
+        <p> {{ count }} </p>
+        <button type="button" v-on:click="addCount" class="btn btn-primary">Increase Count</button>
+
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {   
+                return {
+                    name: 'Jack',
+                    phone: '123456',
+                    isGreen: true,
+                    isBlue: false,
+                    items: ['a', 'b', 'c'],
+                    isPrimary: true,
+                    isSecondary: false,
+                    size: '30px',
+                    counter: 0,
+                    count: 0,
+                    links: ['https://www.smu.edu.sg/',
+                            'https://www.ntu.edu.sg/Pages/home.aspx', 
+                            'http://nus.edu.sg/']
+                }
+            }, // do not forget ","
+            methods: {   // methods accessible in that element
+                // getPhone() {
+                getPhone: function() { 
+                    return "This is my number " + this.phone; // do not forget "this"
+                },
+                getName: function() {
+                    return "My name is " + this.name;
+                },
+                toggle: function() {
+                    if (this.isPrimary) {
+                        this.isPrimary = false
+                        this.isSecondary = true
+                    } else {
+                        this.isPrimary = true
+                        this.isSecondary = false
+                    }
+                        
+                },
+                addCount: function() {
+                    this.count++
+                }
+            }
+        }).mount('#app2')
+    </script>
+
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+    crossorigin="anonymous"></script>
+
+</body>
+</html>

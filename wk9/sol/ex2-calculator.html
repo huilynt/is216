@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>A Vue.js Calculator</title>
+  <!-- directly using vue.js -->
+  <!-- for production version, use vue.min.js -->
+  <!-- we shall use development version, includes helpful console warnings -->
+  <!-- <script src="vue.js"></script> --> 
+
+  <!-- using CDN -->
+  <script src="https://unpkg.com/vue@next"></script>
+  <style>
+    p, input { font-family: monospace; }
+    p { white-space: pre; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <p>x <input v-model.number="x"></p>
+    <select v-model="selectedOp">
+        <option v-for="op in operators" >{{ op }}</option>
+    </select>
+    <p>y <input v-model.number="y"></p>
+    
+    <p>---------------------</p>
+
+    <p>= {{result}}</p>
+  </div>
+
+ 
+  <script>
+    const calc = Vue.createApp({
+      data() {
+        return { 
+            x: 0, 
+            y: 0, 
+            lastResult: 0,
+            operators: ["+", "-", "*", "/", "%"],
+            selectedOp: "+"
+        }
+      },
+      computed: {
+        result() {
+            if (this.selectedOp == "+")
+                this.lastResult = this.x + this.y;
+            else if (this.selectedOp == "-")
+                this.lastResult = this.x - this.y;
+            else if (this.selectedOp == "*")
+                this.lastResult = this.x * this.y;
+            else if (this.selectedOp == "/")
+                this.lastResult = this.x / this.y;
+            else if (this.selectedOp == "%")
+                this.lastResult = this.x % this.y;
+
+            return this.lastResult;
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>

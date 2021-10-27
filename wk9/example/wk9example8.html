@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+    crossorigin="anonymous">
+ 
+    <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> --> 
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <div id="app">    
+        <h2> Blog Posts </h2> 
+        <table class="table m-2">
+            <tr><th>ID</th><th>Entry</th><th>Mood</th></tr>
+            <tr v-for="post in posts">
+                <td>{{post.id}}</td>
+                <td>{{post.entry}}</td>
+                <td>{{post.mood}}</td>
+            </tr>
+        </table>
+    </div>
+
+
+
+   
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    posts: [] // array of post objects
+                }
+            },
+            created() { // created is a hook that executes as soon as Vue instance is created
+                axios.get('http://localhost/is216/REST/blog/getPosts.php')
+                .then(response => {
+                    // this gets the data, which is an array, and pass the data to Vue instance's posts property
+                    this.posts = response.data
+                })
+                .catch(error => {
+                    this.posts = [{ entry: 'There was an error: ' + error.message }]
+                })
+            }
+        }).mount('#app')
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+    crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ListRender</title>
+    <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> --> 
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+             
+    <!-- <ul id="app"> 
+        <li v-for="n in evenNumbers"> 
+            {{ n }} 
+        </li>          
+    </ul>  -->
+    <div id="app">
+        <span v-for="n in evenNumbers"> {{ n }} &nbsp; </span>
+    </div>     
+    <script>
+        const vm = Vue.createApp({ 
+            data() {
+                return {
+                    numbers: [ 1, 2, 3, 4, 5 ] 
+                } 
+                
+            }, 
+            computed: { 
+                evenNumbers: function () { 
+                    // The filter() method creates a new array with all elements 
+                    // that pass the test implemented by the provided function.
+                    return this.numbers.filter(function (number) { 
+                        return number % 2 === 0 
+                    }) 
+                } 
+            }
+        }).mount('#app')
+    </script>
+
+</body>
+</html>

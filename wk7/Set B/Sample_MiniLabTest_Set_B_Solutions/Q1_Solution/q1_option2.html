@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Review - Question 1</title>
+
+    <!-- DO NOT REMOVE THE BELOW LINE -->
+    <link rel="stylesheet" href="q1.css">
+</head>
+<body>
+
+    <!-- Inside the shop, shop floor plan 
+            DO NOT REMOVE THIS ELEMENT
+            YOU MAY ADD MORE CODE
+    -->
+    <div id="floor">
+
+
+
+        <!-- Row 1 -->
+        <div class="row">
+        
+            <div class="dining-table">
+                Dining Table 1
+            </div>
+
+            <div class="dining-table">
+                Dining Table 2
+            </div>
+
+            <div class="dining-table">
+                Dining Table 3
+            </div>
+
+            <div class="dining-table">
+                Dining Table 4
+            </div>
+        
+        </div>
+
+
+        <!-- Row 2 -->
+        <div class="row">
+        
+            <div class="dining-table">
+                Dining Table 5
+            </div>
+
+            <div class="dining-table">
+                Dining Table 6
+            </div>
+
+            <div class="dining-table">
+                Dining Table 7
+            </div>
+
+            <div class="dining-table">
+                Dining Table 8
+            </div>
+        
+        </div>
+
+
+        <!-- Row 3 -->
+        <div class="row">
+        
+            <div class="buffet-corner">
+                Buffet Corner
+            </div>
+
+            <div class="cashier-table">
+                Cashier
+            </div>
+        
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <!-- DO NOT REMOVE THIS SECTION -->
+    <script>
+
+        // METHOD 2
+
+        // To all <div> elements with class="dining-table"
+        // Add an Event Listener with user action 'click'
+        // 1) Get all Element objects with class="dining-table"
+        let dining_table_elements = document.getElementsByClassName("dining-table")
+        // This should be HTMLCollection, console log and verify
+        console.log( dining_table_elements )
+
+        // 2) Loop through, take each dining-table Element object
+        // Add 'click' Event Listener
+        for( element of dining_table_elements ) {
+
+            // Verify element
+            console.log( element )
+
+            element.addEventListener('click', function() {
+                let user_name = prompt("What is your name?")
+                // Verify user's input
+                console.log( user_name )
+
+                // If user didn't key in empty or a bunch of white spaces
+                if( user_name.trim() ) {
+                    // Let's go change dining table text to user_name !!!
+                    this.innerText = user_name
+                }
+            })
+
+        }
+
+    </script>
+    
+</body>
+</html>

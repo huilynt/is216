@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Counter</title>
+    <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> --> 
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="counter">
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+    
+    <script>
+        const app = Vue.createApp({
+            
+        });
+
+        app.component('button-counter', {
+            data() {
+                return {
+                    count: 0
+                }
+            },
+            template: ` <div><p>If you like my page, click </p>
+                            <button @click="count++">Like</button>
+                            <p>People liked me {{ count }} times.</p>
+                        </div> `
+        }).mount('#counter')
+       
+    </script>
+
+
+</body>
+
+</html>

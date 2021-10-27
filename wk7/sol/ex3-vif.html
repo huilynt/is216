@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ConditionalRender</title>
+    <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> --> 
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <h1>Please select your login option</h1>
+    <div id="app">
+      <select v-model = "loginType">
+        <option selected value="username">Username login</option>
+        <option>Email login</option>
+      </select>
+      <div v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username">
+      </div>
+      <div v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address">
+      </div>
+    </div>
+    <script>
+        Vue.createApp( {
+            data() {
+                return {
+                    loginType: 'username'
+                }
+            }
+      }).mount('#app')  
+    </script>
+</body>
+</html>

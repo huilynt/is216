@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS</title>
+
+      <!-- 
+        # Use Inline styling for Task 1 and Task 2
+        Task 1: change background color of div1 to orange. 
+        Task 2: Align the title element "Hello Balloons" in the center and change text color to Blue
+        Task 3: The vertical space between the h1 (title) element and the div1 element must be exactly 10px;
+        
+        # Use Internal Styling for the following tasks:
+        Task 4: set the height of each ballon to 100px
+        Task 5: create a vertical space of 10px between the ballons
+        Task 6: Horizontally center the ballons in div1
+    -->
+
+
+    <style>
+         .block { /* DO NOT MODIFY this CSS rule */
+            width: 400px; 
+            height: 600px;
+        }
+
+        /* ADD/MODIFY CODE BELOW */
+
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        img { 
+            display: block;
+            padding-left: 0px;
+            margin-bottom: 10px;
+            height: 100px;
+
+           
+        }
+    </style>
+</head>
+<body>
+  
+    <h1 id="title" style="text-align:center; color:blue; margin-bottom:10px;">Hello Balloons!!!</h1>
+
+    <!-- DO NOT MODIFY THE FOLLOWING HTML CODE -->
+    <div id="div1" class="block" style="background-color: orange;">
+        <img class="center" src="./resources/ballon1.png" alt="">
+        <img class="center" src="./resources/ballon2.png" alt="">
+        <img class="center" src="./resources/ballon3.png" alt="">
+    
+    </div>
+
+    
+</body>
+</html>

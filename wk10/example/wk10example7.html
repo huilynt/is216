@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Event</title>
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div :style="{ 'font-size': fontSize + 'em' }">
+            <product v-for="product in products" v-bind:key="product.id" v-bind:prod="product"
+                v-on:enlarge="fontSize += 0.1" @shrink="fontSize -= 0.1"></product>
+        </div>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    products: [
+                        { id: 1, name: 'iPhone', desc: '<p>This is the best phone in the world!</p>' },
+                        { id: 2, name: 'Samsung', desc: '<p>No, mine is the best!</p>' },
+                        { id: 3, name: 'Oppo', desc: '<p>Mine is cheaper and yet as good!</p>' }
+                    ],
+                    fontSize: 1
+                }
+            }
+        })
+
+        app.component('product', {
+            props: ['prod'],
+
+            /* 
+                Quote https://v3.vuejs.org/guide/component-custom-events.html#defining-custom-events
+                >> It is recommended to define all emitted events in order to 
+                >> better document how a component should work.
+            */
+            emits: ['enlarge', 'shrink'],
+
+            template: `<div class='product'>
+                            <h3>{{ prod.name }}</h3>
+                            <button v-on:click="$emit('enlarge')">
+                                Enlarge text </button>
+
+                            <button v-on:click="doShrink()">
+                                Shrink text </button>    
+
+                            <div v-html='prod.desc'></div>
+                        </div>`,
+
+            /* 
+                doShrink() shows how to emit events inside a method.
+            */
+            methods: {
+                doShrink() {
+                    // Another way to emit events.
+                    this.$emit('shrink');
+                }
+            }
+        })
+
+        
+        // IMPORTANT NOTE: Vue Component MUST BE declared before mounting the Vue app.
+
+        app.mount('#app')
+    </script>
+
+</body>
+
+</html>

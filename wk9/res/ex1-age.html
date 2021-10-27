@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Compute Age</title>
+    <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> -->
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <label
+        >Kindly enter your birthday:
+        <input v-model="birthday" placeholder="MM/DD/YYYY"
+      /></label>
+      <p>Your age is: {{ age }}</p>
+    </div>
+    <script>
+      //todo: create a Vue instance to finish the task
+      Vue.createApp({
+        data() {
+          return {
+            birthday: "05/20/2000",
+          };
+        },
+        computed: {
+          age: function () {
+            var cur = new Date();
+            var prev = new Date(this.birthday);
+            console.log(prev);
+
+            if (cur.getMonth() > prev.getMonth()) {
+              return cur.getFullYear() - prev.getFullYear();
+            } else if (
+              cur.getMonth() === prev.getMonth() &&
+              cur.getDate() >= prev.getDate()
+            ) {
+              return cur.getFullYear() - prev.getFullYear();
+            } else {
+              return cur.getFullYear() - prev.getFullYear() - 1;
+            }
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

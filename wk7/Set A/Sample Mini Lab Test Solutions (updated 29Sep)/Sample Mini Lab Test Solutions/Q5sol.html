@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
+
+    <title>Document</title>
+</head>
+<body>
+    glossterm: <span style="color:blue" id="displayText1"></span><br>
+    para: <span style="color:blue" id="displayText2"></span><br>
+    <span style="color:red" id="displayErr"></span>
+
+    <script> 
+    // solution
+    url = "glossary.php";
+    axios.get(url)
+    .then(response => {
+        obj = response.data;        
+        document.getElementById("displayText1").innerText = obj.glossary.GlossDiv.GlossList.GlossEntry.GlossTerm;
+        document.getElementById("displayText2").innerText = obj.glossary.GlossDiv.GlossList.GlossEntry.GlossDef.para;
+    })
+    .catch(error => {
+        document.getElementById("displayErr").innerText = "An error has occurred";
+    })
+
+    </script>
+</body>
+</html>

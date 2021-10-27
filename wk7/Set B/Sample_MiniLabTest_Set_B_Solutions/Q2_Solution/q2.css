@@ -1,0 +1,54 @@
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    background: linear-gradient(to right, rgb(164, 255, 247), blue)
+}
+
+#grid {
+    width: 400px;
+    height: 400px;
+    background-color: yellow;
+    margin: auto;
+    border: 1px solid grey;
+}
+
+#message {
+    height: 30px;
+    font-size: 15px;
+    text-align: right;
+    padding-right: 10px;
+    padding-top: 10px;
+    background-color: rgb(59, 59, 59);
+    color: white;
+}
+
+#current-equation {
+    height: 40px;
+    font-size: 20px;
+    text-align: right;
+    padding-right: 10px;
+    background-color: rgb(59, 59, 59);
+    color: white;
+}
+
+.row {
+    display: flex;
+    font-size: 26px;
+}
+
+.key {
+    height: 40px;
+    border: 2px solid pink;
+    padding: 10px;
+    text-align: center;
+}
+
+.span-one {
+    width: 80px;
+}
+
+.span-two {
+    width: 186px;
+}

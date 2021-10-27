@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ex4</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+    crossorigin="anonymous">
+
+     <!-- using CDN -->
+     <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+   
+    <div id="app">
+      
+      
+            <div class="mb-3">
+                <label for="desc" class="form-label">Task</label>
+                <input type="text" class="form-control" id="desc" v-model='desc' placeholder="task">
+            </div>
+            <div class="mb-3">
+                <label for="deadline" class="form-label">Deadline</label>
+                <input type="date" class="form-control" id="deadline" v-model='deadline' placeholder="deadline">
+            </div>
+        
+            <button type="button" @click="add" class="btn btn-primary">Add New Task</button>
+            <hr>
+
+            <!-- TODO: Modify following code -->
+            <task-tracker ></task-tracker>
+                 
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    desc: '',
+                    deadline: '',
+                    taskList: []
+                }
+            },
+            methods: {
+                add() {
+                    this.taskList.push( { 'desc': this.desc, 'deadline': this.deadline } )
+                    this.desc = ''
+                    this.deadline = ''
+                },
+                // TODO: Add a new method, to delete a task completed
+            }
+        })
+
+        app.component('task-tracker', {  
+            // TODO: implement task-tracker component 
+        })
+
+        app.mount('#app')
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+    crossorigin="anonymous"></script>
+
+</body>
+</html>

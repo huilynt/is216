@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        What is Vue Component? -> self-contained & reusable custom element
+        1. Vue Component Syntax : 
+            Vue.createApp( {} ).
+                component('comp-name', {
+                                    props : ['prop1', 'prop2'],
+                                    
+                                    emits : ['event1', 'event2'],
+                                    
+                                    template: `HTML code`,
+                                    
+                                    data: function() {
+                                        return { val : 'some data' }
+                                    },
+                                    
+                                    methods: {
+                                        compute: function() {
+                                            // compute something
+                                        }
+                                    },
+                                    computed: {
+                                        someValue () {
+                                            return "some value"
+                                        }
+                                    }
+                                    
+                                }
+                        )
+
+        2. Register component before mount
+
+        3. Single root element
+
+        4. Passing data to component with props -- custom attributes
+
+        5. Passing content with Slots
+
+        6. Emitting Events & Data
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Component</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+    crossorigin="anonymous">
+
+    <style>
+        body {  
+            background: linear-gradient(to right, rgb(90, 216, 255), rgb(254, 63, 97)); 
+        }
+    </style>
+
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+</head>
+<body>
+
+    <div id='app'>
+        <h2>Total Likes: {{ total }}</h2>
+        <custom-img v-for="img in images" e="1" :key='img.caption' :val='img' @c-event='computeTotal' >
+            {{ img.info }}
+        </custom-img>
+
+
+
+        <!-- <img v-for="img in images" :src="img.path" alt=""> -->
+     
+     
+       <!--  <my-component custom='img/dracula.png'>Dracula</my-component>
+        <my-component custom='img/despicable-me.jpg'>Despicable</my-component>
+
+        <my-component custom='img/monster.jpg'>Monster</my-component> -->
+
+      <!--   <my-component v-for = 'image in images'
+                        v-bind:key = 'image.name'
+                        v-bind:custom = 'image.path'
+        >
+        {{ image.name }}
+        </my-component> -->
+      
+    </div> 
+
+    <script>
+
+    const app = Vue.createApp({
+                    data() {
+                        return {
+                            total: 0,
+                            images:   [
+                            {   caption : 'Dracula', path: 'img/Dracula.jpg',
+                                info: "Dracula is an 1897 Gothic horror novel by Irish author Bram Stoker. It introduced the character of Count Dracula and established many conventions of subsequent vampire fantasy.[1] The novel tells the story of Dracula's attempt to move from Transylvania to England so that he may find new blood and spread the undead curse, and of the battle between Dracula and a small group of people led by Professor Abraham Van Helsing."
+                            },
+
+                            {
+                                caption: 'Megamind', path: 'img/Megamind.jpg',
+                                info: "  Megamind is a 2010 American computer-animated superhero comedy film directed by Tom McGrath and released by Paramount Pictures and DreamWorks Animation. It features the voices of Will Ferrell, Tina Fey, Jonah Hill, David Cross, and Brad Pitt."
+                            },
+                            {
+                                caption: 'Despicable', path: 'img/Despicable.jpg',
+                                info: "Despicable Me is a 2010 American 3D computer-animated comedy film produced by Illumination Entertainment as its debut film and project and distributed by Universal Pictures. The film was animated by the French animation studio Mac Guff, which was later acquired by Illumination.[5] Directed by Pierre Coffin and Chris Renaud in their directorial debuts with a story by Sergio Pablos and screenplay by Cinco Paul and Ken Daurio, the film is eponymous with the main character and its theme song, composed by Pharrell Williams."
+                            }
+                            ] 
+                        }
+                        
+                    },
+                    methods: {
+                        computeTotal(e) {
+                            this.total++
+                            console.log(e)
+                        }
+                    }
+                })
+    </script>
+
+    <script src='tilt.js'></script>
+
+   
+
+    <script>
+
+        app.component('custom-img', {
+            data() {
+                return { 
+                    counter: 0,
+                    max: 30,
+                    pers: 500
+                }
+            },
+
+            methods: {
+                increment() {
+                    // this.counter++
+                    this.counter += Number(this.e)
+                    //console.log(this.e)
+                    this.$emit('c-event', this.e);
+                }
+            },
+            props: ['val', 'e'],
+
+            emits: ['c-event'],
+
+            template: `<div> 
+               
+                    <h2>{{ val.caption }}</h2>
+                    
+                    <tilt class="cols" :max="max" :perspective="pers">
+                        <img v-bind:src="val.path" style="width:200px;">
+                    </tilt>
+
+                    <button v-on:click="increment" class="btn btn-primary">Like</button> {{ counter }}
+
+                    <p style="color:white"><slot></slot></p>
+               
+                </div>`
+        })
+
+        app.mount('#app')
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+    crossorigin="anonymous"></script>
+
+</body>
+</html>

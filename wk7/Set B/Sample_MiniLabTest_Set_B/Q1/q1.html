@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Review - Question 1</title>
+
+    <!-- DO NOT REMOVE THE BELOW LINE -->
+    <link rel="stylesheet" href="q1.css">
+</head>
+<body>
+
+
+    <!-- [START] floor
+            DO NOT REMOVE THIS ELEMENT
+            YOU MAY ADD MORE CODE
+    -->
+    <div id="floor">
+
+
+        <!-- Row 1 -->
+        <div class="row">
+        
+            <div class="dining-table">
+                Dining Table 1
+            </div>
+
+            <div class="dining-table">
+                Dining Table 2
+            </div>
+
+            <div class="dining-table">
+                Dining Table 3
+            </div>
+
+            <div class="dining-table">
+                Dining Table 4
+            </div>
+        
+        </div>
+
+
+        <!-- Row 2 -->
+        <div class="row">
+        
+            <div class="dining-table">
+                Dining Table 5
+            </div>
+
+            <div class="dining-table">
+                Dining Table 6
+            </div>
+
+            <div class="dining-table">
+                Dining Table 7
+            </div>
+
+            <div class="dining-table">
+                Dining Table 8
+            </div>
+        
+        </div>
+
+
+        <!-- Row 3 -->
+        <div class="row">
+        
+            <div class="buffet-corner">
+                Buffet Corner
+            </div>
+
+            <div class="cashier-table">
+                Cashier
+            </div>
+        
+        </div>
+        
+
+
+    </div><!-- [END] floor -->
+
+
+
+
+
+
+
+
+
+    <!-- DO NOT REMOVE THIS SECTION -->
+    <script>
+        var tables = document.getElementsByClassName("dining-table");
+        for (var table of tables) {
+            console.log(table)
+            table.addEventListener('click', clickTable)
+        }
+        // YOUR CODE GOES HERE
+        function clickTable(e) {
+            var name = prompt("What is your name?");
+            if (name.length !== '') {
+                e.target.innerText = name;
+            }
+        }
+    </script>
+
+    
+</body>
+</html>

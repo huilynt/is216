@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Props</title>
+    <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> --> 
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id = "product">
+        <product name="iPhone" price="1000"></product> 
+        <product name="Samsung" price="900"></product> 
+        <product name="Oppo" price="500"></product> 
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            
+        })
+
+        app.component('product', { 
+            props: ['name', 'price'], 
+            template: `<div><h3>Product Name: {{ name }}</h3>
+                        <h4>Price: {{ price }}</h4>
+                    </div>`
+        })
+
+        app.mount('#product')
+    </script>
+
+</body>
+</html>

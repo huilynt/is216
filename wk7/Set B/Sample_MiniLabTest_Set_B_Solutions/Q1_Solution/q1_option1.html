@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Review - Question 1</title>
+
+    <!-- DO NOT REMOVE THE BELOW LINE -->
+    <link rel="stylesheet" href="q1.css">
+</head>
+<body>
+
+    <!-- Inside the shop, shop floor plan 
+            DO NOT REMOVE THIS ELEMENT
+            YOU MAY ADD MORE CODE
+    -->
+    <div id="floor">
+
+
+
+        <!-- Row 1 -->
+        <div class="row">
+        
+            <div class="dining-table" onclick="add_customer(this)">
+                Dining Table 1
+            </div>
+
+            <div class="dining-table" onclick="add_customer(this)">
+                Dining Table 2
+            </div>
+
+            <div class="dining-table" onclick="add_customer(this)">
+                Dining Table 3
+            </div>
+
+            <div class="dining-table" onclick="add_customer(this)">
+                Dining Table 4
+            </div>
+        
+        </div>
+
+
+        <!-- Row 2 -->
+        <div class="row">
+        
+            <div class="dining-table" onclick="add_customer(this)">
+                Dining Table 5
+            </div>
+
+            <div class="dining-table" onclick="add_customer(this)">
+                Dining Table 6
+            </div>
+
+            <div class="dining-table" onclick="add_customer(this)">
+                Dining Table 7
+            </div>
+
+            <div class="dining-table" onclick="add_customer(this)">
+                Dining Table 8
+            </div>
+        
+        </div>
+
+
+        <!-- Row 3 -->
+        <div class="row">
+        
+            <div class="buffet-corner">
+                Buffet Corner
+            </div>
+
+            <div class="cashier-table">
+                Cashier
+            </div>
+        
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <!-- DO NOT REMOVE THIS SECTION -->
+    <script>
+
+        // METHOD 1
+
+        // YOUR CODE GOES HERE
+        function add_customer(dining_table_element) {
+
+            let customer_name = prompt("What is your name?")
+
+            if( customer_name ) {
+
+                dining_table_element.innerText = customer_name
+
+            }
+
+        }
+
+    </script>
+    
+</body>
+</html>

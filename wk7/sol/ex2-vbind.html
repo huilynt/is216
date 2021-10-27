@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>vbind</title>
+     <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> --> 
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body id="app">
+  
+    <!-- : is a short-hand notion of v-bind -->
+    <!-- <img v-bind:src="myImg" :width="width" :height="height" /> -->
+
+    <img v-bind:src="myImg" v-bind:style="{'width': width, 'height': height}" />
+  
+
+  <script>
+    Vue.createApp({
+        data() {
+          return {
+            width: '100px',
+            height: '100px',
+            myImg: 'img/me.png'
+          }
+        }
+    }).mount('#app')   
+  </script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  
+
+<title>Event Handling & DOM Manipulation</title>
+<style>
+    .a {
+        color: blue;
+    }
+
+    .b {
+        color: red;
+    }
+
+    .c {
+        width: 200px;
+        height: 200px;
+        text-align: center;
+        background-color: rgb(161, 96, 116);
+    }
+
+    .d {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        text-align: center;
+        padding: 20px;
+        background-color: rgb(32, 175, 218);
+    }
+</style>
+
+<script>
+    function foo() {
+        console.log("foo")
+
+    }
+</script>
+
+<script>
+    /*
+        1. Document object model (DOM) : a tree-like data structure that represents HTML document 
+            - HTML elements, attributes, texts are represented as nodes 
+
+        2. Event handling: JS can listen to events and react to them
+        
+        3. DOM manipulation: manipulating DOM, JS can create dynamic web pages 
+            - changing HTML elements, attributes, CSS styles, adding, removing elements and attributes, reacting to events, etc.
+
+        4. HTML Elements have properties and methods
+            - property is a value that you can get or set -- elem.value, elem.type, elem.id, elem.name, etc.
+            - method is an action that you can perform for accessing elements, attributes, creating, or removing elements
+
+        5. Access elements: getElementById, getElementsByClassName, getElementsbyTagName
+
+        6. Add/Remove elements: createElement, createTextNode, appendChild, remove
+
+        7. Access & modify attributes: 
+            via properties:
+                .value, .id, .href, .src, .style.property
+
+            via methods:
+                getAttribute, getAttributeNames,            
+                getAttributeNode, setAttribute, 
+                getAttribute returns value of an attribute (not an object). 
+        
+        8. Modify CSS Styling
+            element.style.property
+            e.g. element.style.backgroundColor = "red"
+            
+            Note: use lowerCamelCase to access CSS properties
+                e.g.,   use textAlign instead of text-align
+                        use 
+
+
+        8. Event handling
+                Separation of concerns: addEventListener
+                Passing parameters to event handlers
+                
+    */
+</script>
+</head>
+<body>
+    <h2>Basics</h2>
+    <div class="bg-primary text-danger text-center" style='background-color:red;color:white; text-align:right;'>TEXT</div>
+    <!-- Task: Add code to create some spaces between the paragraphs and the buttons -->
+    <!-- Task: Add code to create some background color to the paragraphs -->
+    <p id="time" class="lead">Tell Time</p> 
+    <button class="btn btn-primary d-block" onclick= "document.getElementById('time').innerText= Date()">What time is it? </button>
+
+    <p class="hello lead">To be updated</p>
+    <p class="hello lead">To be updated</p>
+    
+    <button class="btn btn-primary d-block" onclick="sayHello()">Say Hello </button>
+
+    <script>
+        function sayHello() {
+            // be mindful that x is an array here (an array-like HTML collection Object to be precise)
+            var x = document.getElementsByClassName("hello"); // returns an array-like HTMLcollection object
+            //console.log(x);
+            for (let ele of x) {
+                ele.innerHTML = '<p style="background-color:tomato;">Hello~~~</p>';
+                // innerText doesn't work here!
+                // ele.innerText = '<p style="background-color:tomato;">Hello~~~</p>';
+                console.log(ele)
+                
+            }
+            //console.log(x);
+    }
+    </script>
+    
+    <hr><h2>Class</h2>
+    <div id="div1" class="bg-success m-2 lead">
+        <div class="is216">
+            <p class="text-center">In div1</p>
+            <h4 class="is216">is216 in is216 of div1</h4>
+        </div>
+        <hr>
+        <div class="is113">
+            <span class="is216">is216 in is113</span>
+        </div>
+
+       <!--  <h1 class="is216">a new IS216 class</h1> -->
+    </div>
+
+    <h2 class="is216 m-2">is216 outside div1</h2>
+    <button class="btn btn-primary d-block m-2" onclick="showIS216Classes()">Show IS216 Elements in div1</button>
+    
+    <script>
+        function showIS216Classes() {
+            var x = document.getElementById("div1");
+            // console.log(x); //x represents div1 and its children elements
+            var y = x.getElementsByClassName("is216"); // how many elements are contained in y?
+            console.log("before update");
+            console.log(y); // 3 items
+            // console.log(y[2]);
+
+            // Task: Add a is216 element in div1
+            var newEle = document.createElement("h1"); 
+            var textNode = document.createTextNode("a new IS216 class");
+            newEle.appendChild(textNode);
+
+            newEle.setAttribute("class", "is216");
+
+            x.appendChild(newEle);
+            console.log(x);
+
+            /* var newImg = document.createElement("img");
+            newImg.setAttribute("src", "./emo2.png");
+            var bo = document.body;
+            console.log(bo)
+            bo.appendChild(newImg); */
+
+            console.log("after update");
+            console.log(y)
+
+            // Task: Add a button named 'Button 1' with id='btn1' into div1 element
+        }
+    </script>
+
+    <hr><h2>Tag</h2>
+    <a class="b" href="../sol/ex1.html">ex1</a>
+    <a class="a c" href="../sol/ex2.html">ex2</a>
+    <a class="a b" href="../sol/ex3.html">ex3</a>
+    <button class="btn btn-primary d-block m-2" onclick="getAnchorTags()">Get Anchor Tags</button>
+    <script>
+        function getAnchorTags() {
+            // notice that nodes is an HTMLCollection object which is an array-like object
+            // Task: get the three anchor tags using getElementsByTagName and loop through them
+
+            // Task: get the three anchor elements by means of "class"
+        }
+        
+    </script>
+    
+    <hr><h2>Form</h2>
+    <!-- Task: Add code for invoking validateForm upon clicking "submit" button-->
+    <form action="../example/wk5example1.html" onsubmit="return validateForm()">
+        Email: <input type="text" id="email" name="email">
+        Password: <input type="password" name="password">
+        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+
+      </form>
+    <script>
+      function validateForm() {
+        // getElementsByName returns a HTML collection 
+        console.log(document.getElementsByName("password")[0].type);
+        var email = document.getElementById("email").value;
+        // Task: Add code for checking if email contains the character '@'
+        // return true if yes; otherwise false
+        console.log(email);
+
+        return false;
+
+      }
+    </script>
+
+    <hr><h2>Attributes</h2>
+    <a id="id1" href="../sol/ex1.html">ex1</a>
+    <img id="id2" src="emo.png" class="img-fluid d-block">
+    <input type="text" id="id3" name="user" value="Mary" class="bg-info m-2"> <br>
+    <button id="id4" type="button" class="btn btn-primary m-2" onclick="accessAttributes()">Access Attributes</button>
+    <button id="id5" class="btn btn-primary m-2" onclick="modifyAttributes()">Modify Attributes</button>
+
+    <script>
+        var anchorEle = document.getElementById("id1");
+        
+        var imgEle = document.getElementById("id2");
+        var inputEle = document.getElementById("id3");
+        var btnEle = document.getElementById("id4");
+
+        function accessAttributes() {
+            // loop through attr names of the given element
+            for (let name of inputEle.getAttributeNames()) {
+                // returns names of the attributes 
+                console.log(name); 
+                inputEle[name] = ""
+            }
+
+            // get attribute values of the given element
+            console.log("access using getAttribute method")
+            console.log(inputEle.getAttribute("id"));
+            console.log(inputEle.getAttribute("type"));
+            console.log(inputEle.getAttribute("name"));
+            console.log(inputEle.getAttribute("class"));
+            console.log(inputEle.getAttribute("value"));
+            
+            console.log("access using properties");
+            console.log(inputEle.id); 
+            console.log(inputEle.type);
+            console.log(inputEle.name);
+            console.log(inputEle.class); // this does not work
+            console.log(inputEle.value);
+            console.log(anchorEle.href);
+            console.log(imgEle.src);
+            console.log(btnEle.onclick); // this does not work
+
+            // Task: access various attributes of other elements
+
+        }
+
+        function modifyAttributes() {
+            // all three methods work for id, type, name, src, href attr
+            inputEle.type = 'email'
+            inputEle.id = 'email'
+            inputEle.name = 'email'
+            //inputEle.value = "John"  // this does not work
+            inputEle.getAttributeNode("value").value = "John" 
+            inputEle.setAttribute("value", "Jack");
+            inputEle.class="bg-success m-2" // this does not work
+            console.log(inputEle); 
+
+            // imgEle.src = "../example/emo2.png"; 
+            // imgEle.setAttribute("src", "../example/emo2.png")
+            imgEle.getAttributeNode("src").value = "emo2.png" 
+            imgEle.getAttributeNode("id").value = "img1" 
+            console.log(imgEle);
+
+            anchorEle.href = "#";
+            // anchorEle.setAttribute("href", "#");
+            // anchorEle.getAttributeNode("href").value = "#"
+            anchorEle.innerText = "ex2"
+            console.log(anchorEle);
+
+            btnEle.type = "submit";
+            btnEle.onclick = "modifyAttributes()"; // this does not work
+            btnEle.setAttribute("onclick", "modifyAttributes()");
+            console.log(btnEle);
+
+            // Task: modify class attribute value of inputEle to "bg-success m-2"
+
+        }
+       
+    </script>
+
+    <hr><h2>Modifying CSS Inline Styling</h2>
+    <!-- onmouseover event occurs when the mouse hovers over the element -->
+    <div style="background-color: crimson;" onmouseover="changeStyle()">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, voluptas quae? Maiores architecto quisquam ullam facere numquam sapiente molestias exercitationem iste. Provident, quo non voluptatem nisi et fugit ut molestiae?
+    </div>
+    
+    <script>
+        function changeStyle() {
+            // event.target returns the element upon which the event occurs
+            // i.e., target of the event
+            
+            // Task: use event.target to get the element on which the event occurs
+            
+
+            /* Notice: use lowerCamelCase to access CSS properties with kebab case
+                such as background-color, text-align, etc.
+                because kebab case is not allowed in JS
+            */
+
+            /* Task: change style of the element as follows:
+                        set background color to 'black'
+                        set text alignment to 'center'
+                        set text color to 'white'
+                        enlarge font size to 1.5 times the default font size
+            */
+           var ele = event.target;
+        
+            // don't forget "style"
+            ele.style.backgroundColor = "blue"; // what is the name convention here?
+            ele.style.textAlign = "center";
+            ele.style.color = "white";
+            ele.style.fontSize = "1.5em";
+           
+        }
+    </script>
+    
+    <hr><h2>Passing Params to Event Handler</h2>
+    <!-- Task: 
+            Add code to invoke 'change' method when the user mouse over 'div1' 
+            and pass two parameters: 'd' and 'mouseout me'
+
+            Add code to invoke 'change' method when the user mouse out from 'div1' 
+            and pass two parameters: 'c' and 'mouseover me'
+    -->
+    <div id="div1" name="div" class="c" onmouseover="change('d', 'mouseout')"
+        onmouseout="change('c', 'mouseover')"></div>
+    <script>
+
+        function change(param1, param2) {
+            var divElem = event.target;
+
+            divElem.setAttribute("class", param1);
+
+            divElem.innerHTML = param2;
+            // divElem.style.backgroundColor = 'red';
+            
+        }
+    </script>
+
+    <hr><h2>AddEventListener</h2>
+    <img id="myImg" src="emo.png">
+
+    <script>
+        // separation of concerns: HTML and JavaScript
+
+       var img = document.getElementById("myImg");
+    
+       //img.addEventListener("click", changeImage);
+        
+       img.addEventListener("click", changeSize); // this is a better practice
+
+       //img.addEventListener("mouseover", mOver);
+
+       img.onmouseover = mOver;
+       img.onclick = changeImage;
+      
+       /* Task: 
+            Add an event listener to mouseover event
+            Add an event listener to mouse out event
+       */
+       function mOver() {  
+           // img.style.border="5px solid black";
+           //img.style.border=event.target.myParam;
+           //console.log(event.target.myParam);
+           console.log("mouse over!");
+       }
+
+       function mOut() {
+            // Task: Add code to clear any existing inline styling
+            // when mouse out event occurs
+       }
+
+       function changeImage() {
+          img.src = "emo2.png";
+       }
+
+       function changeSize() {
+          img.style.width = "400px";
+       }
+    </script>    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+         
+</body>
+</html>

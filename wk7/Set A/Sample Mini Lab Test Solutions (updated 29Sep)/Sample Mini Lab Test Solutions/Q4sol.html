@@ -1,0 +1,66 @@
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+</head>
+
+<body>
+
+   <h1>Shopping List</h1>
+   <p>Get it done today</p>
+   <input id="userinput" type="text" placeholder="enter items">
+   <button id="enter" onclick="addList()">Enter</button>
+   <ul id="myul">
+      <li>
+         Notebook
+         <input type="checkbox">
+      </li>
+      <li>
+         Jello
+         <input type="checkbox">
+      </li>
+      <li>
+         Spinach
+         <input type="checkbox">
+      </li>
+      <li>
+         Cake
+         <input type="checkbox">
+      </li>
+   </ul>
+   <button type="submit" onclick="removeItems()">Remove Items</button>
+   <script>
+      function addList() {
+         console.log(event);
+         var input = document.getElementById("userinput");
+         if (input.value.length > 0) {
+            createNewItem(input);
+            input.value = "";
+         }
+      }
+
+      function createNewItem(item) {
+         var ul = document.getElementsByTagName("ul")[0];
+         var li = document.createElement("li");
+         li.innerHTML = item.value +
+            " <input type='checkbox'>";
+         ul.appendChild(li);
+      }
+
+      function removeItems() {
+         var ul = document.getElementById("myul");
+         console.log(ul);
+         var children = ul.childNodes;
+         for (var child of children) {
+            if (child.nodeName === "LI") {
+               if (child.childNodes[1].checked) {
+                  ul.removeChild(child)
+               }
+            }
+         }
+      }
+   </script>
+
+</body>
+
+</html>

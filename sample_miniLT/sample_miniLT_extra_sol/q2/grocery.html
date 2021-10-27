@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Grocery</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+    crossorigin="anonymous">
+
+    <!-- Custom JavaScript -->
+    <script src="grocery.js"></script>
+
+    <!-- CSS (Use this section if you need to) -->
+    <style>
+
+        /* YOUR CSS CODE GOES HERE */
+        ul, li {
+            margin: 0;
+            padding: 0;
+        }
+        
+    </style>
+
+</head>
+<body>
+
+    <div id="main_container" class="container" width="80%" style="margin-top: 20px">
+
+        <h4 class="text-center">Shopping List</h4>
+
+        <div class="row" style="margin-top: 30px">
+            
+            <div class="col">
+                
+                <div class="border bg-light" style="padding: 15px">
+                
+                    <div class="input-group">
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">What to Buy</span>
+                        </div>
+
+                        <input type="text" id="groceryItem" class="form-control" style="width: 20px" placeholder="Enter item name">
+                        
+                        <button type="button" 
+                                style="margin-left: 15px"
+                                class="btn btn-outline-info" onclick="addItem()">Add</button>
+                                        
+                    </div>
+
+                    <div>
+
+                        <div id="groceryList">
+                        </div>
+
+                    </div>
+
+                </div>
+            
+            </div> <!-- end of col -->
+            
+
+            <div class="col">
+
+                <div class="border bg-light" style="padding: 15px">
+
+                    <h6>Calculate Total Amount</h6>
+
+                    <button type="button"  class="btn btn-outline-info" onclick="processItems()">Calculate</button>
+
+                    <div id="result">
+
+                    </div>
+                    
+                </div>
+
+            </div> <!-- end of col -->
+        
+
+        </div> <!-- end of row -->
+
+
+    </div> <!-- End of Outer Div Container -->
+
+
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+          integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+          crossorigin="anonymous"></script>
+
+</body>
+</html>

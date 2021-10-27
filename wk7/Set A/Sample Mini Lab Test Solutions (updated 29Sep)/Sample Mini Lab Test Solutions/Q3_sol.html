@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IS216 Revision III - JavaScript</title>
+
+    <style>
+        .block { 
+           width: 400px; 
+           height: 800px;
+       }
+
+       img {
+           display: block;
+           padding: 10px;
+       }
+   </style>
+</head>
+<body>
+
+    <!-- DO NO MODIFY the given HTML code -->
+    <h1>Hello Ballons Again!!!</h1>
+
+    
+    <div id="div1" class="block" style="background-color: grey;">
+        <img id="b" src="./resources/ballon1.png" alt="">
+        <img id="r" src="./resources/ballon2.png" alt="">
+        <img id="g" src="./resources/ballon3.png" alt="">
+        
+    </div>
+
+    <img id="o" src="./resources/ballon4.png" alt="">
+
+    <h2>Remaining Balloons</h2>
+    <span id="balloons"></span>
+
+    <h2>Choose Ballon Background Color</h2>
+    <input type="radio" name="bcolor" value="#00ff20" onchange="change(this)">Green
+    <input type="radio" name="bcolor" value="#0aef30" onchange="change(this)">Dark Green
+    <input type="radio" name="bcolor" value="#0bdf40" onchange="change(this)">Darker Green
+    <input type="radio" name="bcolor" value="#0ecf50" onchange="change(this)">More Darker Green
+
+    <script>
+        /*
+            Task1: ask the user "Which balloon you like?"
+
+            Task2: 
+                Expected user input is one of the following values (case-insensitive): 
+                    "BLue", "red", "green", "orange"
+                
+                    If the user input contains empty spaces, e.g. "blue ", remove the empty space
+                
+                After removing the empty spaces, 
+                    if the user's answer is not one of the above values, alert "Provide a valid input!"
+                    note: value comparison must NOT be case-sensitive, i.e., "Blue" is a valid input
+
+            Following tasks assume that user has provided a valid input
+
+            Task3: Remove the balloon given by the user from balloons array given in the code below.
+                    And display the remaining balloon in balloons array in the span element with id "balloons".
+                    Each ballon must be separated by a colon ":". For example, 
+                            blue:red:orange
+                    Style it with a background color of yellow
+
+            Task4: 
+                Remove the corresponding ballon image given by the user. That is, if the user provides "green", 
+                then the "green" balloon image is removed.
+
+            Task5: 
+                If user input is NOT "orange" (case-insensitive), move the "orange" balloon inside the "div1" element
+
+            Task6: 
+                When the user selects a radio button, change the background color of the balloons to the value
+                given in the selected radio button.
+
+
+
+        */
+        const balloons = ["blue", "red", "green", "orange"]
+        
+        const divEle = document.getElementById("div1")
+        const cboxes = document.getElementsByTagName("input")
+        //console.log(cboxes)
+        const sEle = document.getElementById("balloons")
+        const imgEle = document.getElementsByTagName("img")// -> 4 images
+
+        var bal = prompt("Which balloon you like?")
+
+        bal = bal.trim().toLowerCase() // trim remove leading and trailing spaces
+
+        console.log(bal);
+
+        /* if (bal == "blue" || bal == "red" 
+            || bal == "green" 
+                || bal == "orange" || bal == "all") {
+                    console.log(bal);
+                    
+        } else {
+            alert("Provide a valid input!")
+        } */
+
+
+        if ( balloons.includes(bal) ) {  // includes -> to check whether a given element is contained in the array
+            console.log(bal);
+
+            let idx = balloons.indexOf(bal) // indexOf returns the index of a given element
+            balloons.splice(idx,1) // splice removes element(s) starting from the given index 
+
+            sEle.innerText = balloons.join(":") // join array operation -> converts array to string where each element in the array is concatenated with the given argument => blue:red:orange
+            sEle.style.backgroundColor = "yellow"
+
+            // bal[0] -> the first character of bal string 
+            let selectedElement = document.getElementById(bal[0])
+            selectedElement.remove()
+
+            if (bal != "orange") {
+                let orEle = imgEle[imgEle.length-1]
+                //console.log(orEle)
+
+                divEle.appendChild(orEle)
+            }
+
+        } else {
+            alert("Provide a valid input!")
+        }
+
+        function change(ele) {
+            //ele.style.backgroundColor = ""
+            let color = ele.value
+
+            for (let ele of imgEle ) {
+                ele.style.backgroundColor = color
+            }
+        }
+    </script>
+   
+ 
+</body>
+</html>

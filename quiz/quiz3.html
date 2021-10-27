@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz3</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+</head>
+<body>
+    <!-- Q1 -->
+    <script>
+        var obj = {
+            name: "mystery",
+            a: 2,
+            b: [3,4],
+            c: function(b) {
+                return this.b[0] + b[0];
+            }
+        };
+        var b = [1,2,3];
+        
+        console.log(obj["a"]) // 2
+        console.log(obj.b[1]) // 4
+        console.log(obj.c( b)) // 3+1
+        
+        console.log( obj["a"] + obj.b[1] + obj.c( b) ); // 2 + 4 + (3+1) 
+    </script>
+
+     <!-- Q2 -->
+     <script>
+         var json1 = {
+                        "code": "IS216",
+                        "course coordinator": {
+                            "name": "Shar",
+                            "handsome": true
+                        }
+                    }
+        var json2 = [ "Shar", "Yimeng" ]
+
+        var json3 = {
+                        "id": 21.6,
+                        "code": "IS216"
+                    }
+
+        var json4 = {
+                        "code": "IS216",
+                        "difficulty": null,
+                        "instructors": [ "Shar", "Yimeng" ]
+                    }
+
+        var json5 = {
+                        "code": "IS216",
+                        "instructors": [
+                            {   "name": "Shar",     "faculty": true   },
+                            {   "name": "Yimeng",   "faculty": false   }
+                        ]
+                    }
+
+        var jsObj = JSON.parse('[ "Shar", "Yimeng" ]') // convert JSON string to JSobj
+        console.log(jsObj)
+     </script>
+
+     <!-- Q3 -->
+     <script>
+        var json_str = '{"name":"Mary" }';
+         
+        // convert JSON string into JavaScript object
+        var obj = JSON.parse(json_str);
+        console.log( obj.name ); // output "Mary"
+    </script>
+
+    <!-- Q4 -->
+    <div id='output'></div>
+    <script>
+        var obj = { name:"Mary" };
+        document.getElementById('output').innerHTML = JSON.stringify(obj);
+    </script>
+
+    <!-- Q5 -->
+    <div id="output2">something</div>
+    <script>
+        var output2 = document.getElementById('output2')
+
+        axios.get('getData.php?x=1')
+            .then(response => {
+                console.log(response.data)
+                // if you want to display JSON object in HTML in an object format
+                // needs to use JSON.stringify
+                output2.innerText = JSON.stringify(response.data)
+            })
+
+    </script>
+
+    <!-- Q6 -->
+    <div id="output3">something</div>
+    <script>
+        var output3 = document.getElementById('output3');
+        var title = "Earn&Young"
+        /*
+            comment: We should use encodeURIComponent() to encode values of HTTP parameters.
+            axios.get('getData.php?title=' + encodeURIComponent(title))
+            Or: use the right syntax of axios.get
+
+            otherwise, special characters like & will cause unintended behavior
+        */
+        axios.get('getData2.php?title=' + title)
+            .then(response => output3.innerText = response.data)
+
+        // this is the right syntax of axios.get
+        /* axios.get('getData2.php', {
+            params: {
+                title: title
+            }
+        })
+        .then(response => output3.innerText = response.data) */
+    </script>
+
+
+    <!-- Q7 -->
+    <div id="app">
+        <!-- YOUR CODE GOES HERE --> 
+        {{ name }}
+        {{ getName() }}
+        {{ this.name }}
+        {{ getName }} <!-- this prints the function definition -->
+        <!-- {{ app.name }} --> <!-- TypeError -->
+    </div>
+    <script>
+        const app = Vue.createApp({
+           data() {
+              return { name: 'I love Vue.js' };
+           },
+           methods: {
+              getName() {
+                 return this.name;
+              }
+           }
+        });
+        const vm = app.mount('#app');
+    </script>   
+
+    <!-- Q8 -->
+    <div id='app2'>
+        <span v-if='num > 0' >A</span>
+        <span >B</span>
+        <!-- although this works, it's not a good practice. 
+            v-else should be adjacent (next sibling) to v-if 
+        -->
+        <span v-else >C</span>  
+        
+    </div>
+     
+    <script>
+        Vue.createApp({
+            data() {
+                return { num: 0 };
+            }
+        }).mount('#app2');
+    </script>  
+
+    <!-- Q9 -->
+    <div id='app3'>
+        <input type='button' v-on:click='clickMe' value='Click Me!'><br>
+        <p>{{counter}}</p>
+     </div>
+     
+     <script>
+       Vue.createApp({
+           data() {
+              return { counter: 0 };
+           },
+           methods: {
+              clickMe() {
+                 this.counter++;
+              }
+           }
+        }).mount('#app3');
+     </script>
+
+    <!-- Q10 -->
+    <div id='app4'>  
+        <input type='text' v-model='message' ><br>
+        <p>{{message}}</p>
+    </div>
+    
+    <script>
+        Vue.createApp({
+            data() {
+                return { message: 'I love Vue.js' };
+            }
+        }).mount('#app4');
+    </script>
+
+    <!-- Q11 -->
+    <span id="firstApp">
+        {{name}}
+    </span>
+    <span id="secondApp">
+        {{name}}
+    </span>
+    
+    <script>
+        Vue.createApp({
+        data() {
+            return {name: 'Mary' };
+        }
+        }).mount('#firstApp');
+        
+        Vue.createApp({
+        data() {
+            return { name: 'John' };
+        }
+        }).mount('#secondApp');
+    </script>
+
+    <!-- Q12 -->
+    <div id="app5">  
+        <ul>
+            <!-- <li v-for="color in colors" >{{color}}</li> -->
+            <li v-for="color of colors" >{{color}}</li> <!-- this also works -->
+        </ul>
+    </div>
+    <script>
+        Vue.createApp({
+            data() {
+                return { colors: ["Red", "Green", "Blue"] };
+            }
+        }).mount('#app5');
+    </script>
+
+    <!-- Q13 -->
+    <div id='app6'>  
+        <!-- first argument is always the value. second argument is the property -->
+        <p v-for="(a,b) in obj">{{a}}{{b}}</p> <!-- goodboy -->
+     </div>
+     
+     <script>
+        Vue.createApp({
+            data() {
+            return {
+                obj: {
+                    boy: 'good'
+                }
+            };
+            }
+        }).mount('#app6');
+     </script>
+
+     <!-- Q14 -->
+     <div id='app7'>  
+         <!-- 
+            Output:  123
+            1 and 3 are in green color, 2 is in red color
+         -->
+        <span v-for="n in count"
+           :style="{ color : colors[n % colors.length] }"
+        >{{n}}</span> 
+     </div>
+     
+        <script>
+        Vue.createApp({
+            data() {
+            return {
+                count: 3,
+                colors: [ "red", "green" ]
+            };
+            }
+        }).mount('#app7');
+     </script>
+
+</body>
+</html>

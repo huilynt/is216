@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Computed</title>
+    <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> --> 
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>First Name: "{{ fName }}"</p>
+        <p>Last Name: "{{ lName }}"</p>
+        <p>Full Name: "{{ fullName }}"</p>
+        <p>Full Name: "{{ getFullName() }}"</p>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    fName: 'Mike',
+                    lName: 'Jones'
+                }
+            },
+            methods: {
+                // note: can't define 'fullName()' as it will conflict with computed prop
+                getFullName() { 
+                    return this.fName + ' ' + this.lName   
+                }
+            },
+            computed: {
+                fullName() {  // getter
+                        // `this` points to this vm instance
+                        return this.fName + ' ' + this.lName   
+                } 
+            }
+        }).mount('#app')
+    </script>
+
+</body>
+</html>

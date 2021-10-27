@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fruits</title>
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="app">
+      {{ message }} </br>
+      {{ fruit1 }} <input type="radio" name="fruit">
+      {{ fruit2 }} <input type="radio" name="fruit">
+      {{ fruit3 }} <input type="radio" name="fruit">
+  </div>
+
+  <script>
+    const app = Vue.createApp( {
+        data() {
+          return {
+            message : 'Choose your favorite fruit:',
+            // we can also do this with an array
+            fruit1 : 'apple',
+            fruit2 : 'orange',
+            fruit3 : 'peach'
+          }
+				}
+    })
+
+    // Link (mount) Vue instance to DOM element with id 'app2'
+    const vm = app.mount('#app')
+  </script>
+
+  <!-- challenge: use fruits array instead of fruit1, fruit2, fruit3 -->
+  <!-- note: id must be unique. i.e. it must be different from the one above -->
+  <div id="app2">
+    {{ message }} </br>
+    {{ fruits[0] }} <input type="radio" name="fruit">
+    {{ fruits[1] }} <input type="radio" name="fruit">
+    {{ fruits[2] }} <input type="radio" name="fruit">
+  </div>
+
+  <script>
+     const app2 = Vue.createApp( {
+        data() {
+          return {
+            message : 'Choose your favorite fruit:',
+            // using an array
+            fruits : ['apple', 'orange', 'peach'],
+          }
+				}
+    })
+
+    // Link (mount) Vue instance to DOM element with id 'app2'
+    app2.mount('#app2')
+  </script>
+</body>
+</html>

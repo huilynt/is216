@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dynamic Property</title>
+    <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> --> 
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id='app'>
+        <!-- bind a vue variable to a Vue property dynamically using radio bottons -->
+        <!-- when checked vm.pick === vm.a -->
+        <input type="radio" v-model="pick" v-bind:value="a"> {{ a }}
+        <!-- when checked vm.pick === vm.b -->
+        <input type="radio" v-model="pick" v-bind:value="b">B
+        <p> Picked: {{ pick }} </p>
+
+        <!-- bind a vue variable to a Vue property dynamically using select -->
+        <!-- when 123 is selected: 
+            typeof vm.selected // => ‘object’
+            vm.selected.number // => 123
+        -->
+
+        <!-- inline object literal -->
+        <!--  <select v-model="selected"> 
+            <option v-bind:value="{ number: 123 }">123</option> 
+            <option v-bind:value="{ number: 456 }">456</option> 
+        </select>
+        <p>Selected: {{ selected.number }}</p>
+    -->
+    </div>
+
+    <script>
+        const vm = Vue.createApp({
+            data() {
+                return {
+                    pick: '',
+                    a: 'AAA',
+                    b: 'BBB'
+                }
+            }
+        }).mount('#app')
+    </script>
+
+    <div id="app2">
+        <select v-model="selected">
+            <option v-for="option in options" v-bind:value="option.value">
+                {{ option.text }}
+            </option>
+        </select>
+        <span>Selected: {{ selected }}</span>
+    </div>
+
+    <script>
+        const vm2 = Vue.createApp({
+            data() {
+                return {
+                    selected: 'A',
+                    options: [
+                        { text: 'One', value: 'Joe Biden' },
+                        { text: 'Two', value: 'Donald Trump' },
+                        { text: 'Two2', value: 'Donald Trump Junior' },
+                        { text: 'Three', value: 'Who' }
+                    ]
+                } 
+            }
+        }).mount('#app2')
+    </script>
+
+</body>
+
+</html>

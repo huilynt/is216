@@ -1,0 +1,44 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#floor {
+    width: 560px;
+    height: 420px;
+    background-color: aqua;
+    margin: auto;
+    margin-top: 30px;
+    border: 1px solid black;
+}
+
+.dining-table {
+    width: 100px;
+    height: 100px;
+    background-color: pink;
+    margin: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.buffet-corner {
+    width: 240px;
+    height: 100px;
+    background-color: green;
+    margin: 20px;
+    position: relative;
+    right: 70px;
+}
+
+.cashier-table {
+    width: 100px;
+    height: 100px;
+    background-color: grey;
+    margin: 20px;
+    position: relative;
+    /* left: 40px; */
+    right: -70px;
+}

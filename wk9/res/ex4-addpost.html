@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blog</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> --> 
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+</head>
+
+<body>
+
+    <div id="app" class="table m-2">
+        <h3>Add a New Blog Post</h3>
+
+        Subject: <input type='text' size='30' v-model='subject' required>
+        <br>
+
+        Entry: <br>
+        <textarea name='entry' cols='80' rows='5' v-model='entry' required></textarea>
+        <br>
+
+        Mood:
+        <!-- TODO: Build a dropdown list here for selecting the mood -->
+        <br>
+
+        <br>
+        <button>Submit New Post</button>
+
+        <hr> Click <a href='../example/wk9example8.html'>here</a> to return to Main Page
+    </div>
+
+    <script>
+        // TODO: ADD Code Here. Hint: Use either Axios GET or POST
+    </script>
+
+</body>
+
+</html>

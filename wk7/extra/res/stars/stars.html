@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Stars</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+
+    <!-- Vue 3: development -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+
+<body>
+    <div id="app" class="m-4">
+        <!-- Add/Modify following code -->
+        Num: <input type="number" v-model="num"> <br>
+        Select Symbol:<br>
+        stars: <input name="symbol" type="radio" value='*'>
+        dollars: <input name="symbol" type="radio" value='$'>
+
+    </div>
+
+<script>
+    // Add/Modify following code
+    const vm = Vue.createApp({
+        el: '#app',
+        data: {
+            num: 0,
+            selected: ''
+        }
+    }).mount('#app');
+</script>
+
+</body>
+
+</html>

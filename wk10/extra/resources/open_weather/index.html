@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+    crossorigin="anonymous">
+
+   <!-- using CDN -->
+   <script src="https://unpkg.com/vue@next"></script>
+
+   <!-- Axios -->
+   <script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+    <script src="weather-comp.js"></script>
+</head>
+<body>
+   
+   <div class='container' id='app'>
+      <div class='row'>
+         <div class='col'>
+            <h3>World's weather</h3>
+            
+            <table class='table table-striped'>
+               <tbody>
+                  <tr v-for='city in cities'>
+                     <td>
+                        <weather-comp :city='city'></weather-comp>        
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            
+         </div>
+      </div>
+   </div>
+   
+   <script>
+      const app = Vue.createApp({
+                     data() {
+                        return {
+                              cities: ["Singapore", "London", "Beijing", "Washington"],
+                           };
+                     },
+                  });
+     
+   </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+crossorigin="anonymous"></script>
+    
+</body>
+</html>

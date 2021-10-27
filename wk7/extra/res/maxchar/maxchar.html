@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MaxChar</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+
+    <!-- Vue 3: development -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <style>
+        .warn {
+            background-color: mistyrose
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- modify the following textarea -->
+        <textarea>
+        </textarea>
+        {{text.length}}
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    text: 'What if I told you ' +
+                        'Vue can do that',
+                    limit: 50
+                };
+            }
+            // add code here
+        });
+        const vm = app.mount('#app');
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Review - Question 3</title>
+
+    <!-- DO NOT REMOVE THE BELOW LINE -->
+    <script src="axios/axios.min.js"></script>
+
+    <!-- DO NOT MODIFY THE BELOW INTERNAL CSS -->
+    <style>
+      .low {
+        background-color: green;
+        color: white;
+      }
+
+      .medium {
+        background-color: yellow;
+        color: black;
+      }
+
+      .high {
+        background-color: orange;
+        color: black;
+      }
+
+      .lethal {
+        background-color: red;
+        color: white;
+      }
+
+      h1 {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header 
+         DO NOT MODIFY THIS HTML
+    -->
+    <div>
+      <h1>COVID-19 Count</h1>
+    </div>
+
+    <!-- COVID risk color is shown here 
+         DO NOT MODIFY the below <div>'s id and style.
+    -->
+    <div id="risk" style="width: 100px; height: 30px; margin: auto"></div>
+
+    <!-- COVID Statistics are shown here 
+         DO NOT MODIFY the below <div>'s id.
+    -->
+    <div id="stats"></div>
+
+    <!-- JavaScript below -->
+    <script>
+      // DO NOT MODIFY THE BELOW LINE
+      var input_country = prompt(
+        "Enter a country name (e.g. Singapore, USA, Brazil, etc.)"
+      );
+
+      // DO NOT MODIFY THIS URL
+      var url = "covidapi/count.php";
+
+      // YOUR CODE GOES HERE
+      // FEEL FREE TO WRITE YOUR OWN FUNCTIONS AS DEEMED NECESSARY
+
+      axios
+        .post(url)
+        .then((result) => {
+          console.log(result.data.statistics);
+
+          var stats = document.getElementById("stats");
+          stats.appendChild(document.createElement("ul"));
+          addLi(`Country: ${convertCase(input_country)}`);
+
+          var countryStats = searchCountry(
+            result.data.statistics,
+            input_country
+          );
+          if (!countryStats) {
+            console.log("!countryStats");
+            return;
+          }
+
+          addLi(`Total Cases: ${countryStats["total_cases"]}`);
+          addLi(`Total Deaths: ${countryStats["total_deaths"]}`);
+          var mortalityRate = (
+            countryStats["total_deaths"] / countryStats["total_cases"]
+          ).toFixed(7);
+          addLi(`Mortality Rate: ${mortalityRate}`);
+
+          var bgColor = 'lethal';
+          if (mortalityRate < 0.01) {
+            bgColor = 'low';
+          } else if (mortalityRate < 0.02) {
+            bgColor = 'medium';
+          } else if (mortalityRate < 0.03) {
+            bgColor = 'high';
+          }
+          document.getElementById("risk").classList.add(bgColor)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      function addLi(text) {
+        var ul = stats.getElementsByTagName("ul")[0];
+        var li = document.createElement("li");
+        li.innerText = text;
+        ul.appendChild(li);
+      }
+
+      function searchCountry(objStatistics, searchTerm) {
+        for (var region in objStatistics) {
+          for (var country in objStatistics[region]) {
+            if (country.toLowerCase() === searchTerm.trim().toLowerCase()) {
+              return objStatistics[region][country];
+            }
+          }
+        }
+        return false;
+      }
+      
+      function convertCase(text) {
+          text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
+          return text
+      }
+    </script>
+  </body>
+</html>

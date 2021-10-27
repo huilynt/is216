@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!--
+        1. CSS: a set of rules of the form: selector { property : value; }  
+            - note: do not omit ';' 
+        2. Three ways of CSS: inline, internal, external
+            inline: <p style="text-align:center;">
+            internal: <style> p { text-align:center; } </style>
+            external (*.css file): p { text-align:center; }
+        3. Comment: /* ... */ 
+        4. Selectors
+            Element: p, h1, img, a, button, etc.
+            id: #unique-name
+            class: .class-name  (an element can belong to multiple classes)
+        
+        5. Unit of Measurement: Absolute Unit, Relative Unit
+            Absolute: px, in, cm
+            Relative: %, em, vw
+        6. Color: rgba(50, 180, 39, 1) /* red, green, blue, alpha */
+        7. Display: inline, block, none
+        8. Box Model: content, padding, border, margin
+            - every HTML element is a box
+        9. Positioning element: static, absolute, fixed, relative, sticky
+        10. Styling Forms: input[type=text] { ... }
+        11. Pseudo class: define a state of an element
+            - Syntax: selector:pseudo-classs { property : value; } 
+    -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS</title>
+
+  <style>
+    #unique {
+      text-align: center;
+      color:rgb(168, 73, 92);
+      background-color: darkgrey;
+      position: sticky;
+      top: 0px;   /* pos wrt browser where you want to stick */
+    }
+
+    .emphasis {
+      width: 200px;
+      text-align:justify;
+      color:darkblue;
+      border: 1px solid black;
+      margin: 1em;
+      padding: 10px;
+      background-color: darkgray;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    tr:hover {
+      color:darkolivegreen;
+    }
+
+    /* unvisited link */
+    a:link { color: red; }
+    /* visited link */
+    a:visited { color: green; }
+    /* mouse over link */
+    a:hover { color: hotpink; }
+    /* selected link */
+    a:active { color: blue; }
+
+    .pos {
+      width: 400px;
+      height: 400px;
+      background-color: darkgray;
+      position: relative;
+      left: 30px;
+      top: 30px; 
+      /* bottom: 30px;
+      right: 30px; need to remove width and height to see effect */
+    }
+    .child {
+      width: 50px;
+      height: 50px;
+      background-color: darkgreen;
+      position: absolute;
+      top: 10%;
+      /* bottom: 30px;
+      right: 30px; */
+
+    }
+  </style>
+</head>
+<body>
+
+  <div id="unique">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt amet atque reiciendis repellendus, architecto eum quae nesciunt quibusdam, repudiandae rerum, molestias sunt numquam consequuntur? Placeat vitae illum nobis quia! Quas.</div>
+
+  <div class="emphasis">Lorem ipsum dolor sit amet consectetur adipisicing elit. At adipisci aspernatur quasi nobis sit nam accusamus. Obcaecati repellendus odit sequi nemo debitis aliquid nisi et laboriosam. Fugit est ut nihil?</div>
+
+  <div class="emphasis" style="display:inline-block;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam labore omnis, minima quidem consequatur beatae totam eum quis impedit illum nisi nostrum tempore alias? Architecto earum iste tenetur doloribus perferendis!</div>
+
+  <div class="emphasis" style="display:inline-block;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, dignissimos obcaecati porro perferendis corrupti minus voluptatem eius nostrum eveniet, distinctio, repudiandae sapiente vero deleniti. Nisi quam et labore iusto molestiae?</div>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+    <tr>
+      <td>Jack</td>
+      <td><a href="../sol/ex2.html">jackneo@gmail.com</a></td>
+    </tr>
+    <tr>
+      <td>Mary</td>
+      <td><a href="mailto:mary@gmail.com">mary@gmail.com</a></td>
+    </tr>
+  </table>
+
+  <div class="pos">
+    <div class="child" style="z-index:1">this is a child</div>
+    <div class="child" style='background-color:darkmagenta;'>this is another child</div>
+  </div> 
+</body>
+</html>

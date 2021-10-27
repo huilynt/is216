@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+    crossorigin="anonymous">
+
+    <title>Lecture - Bootstrap</title>
+
+    <!-- 
+        1. What is Bootstrap?
+            - a front-end framework for styling & designing fully responsive web pages
+            - using bootstrap.min.css and bootstrap.min.js libraries
+            - has built-in CSS classes for styling components readily
+
+        2. Grid System
+            - provides 12 column grid system for building layouts of all shapes & sizes
+            - can easily design the layout by doing col-*, where * can range from 1 to 12
+        
+        3. Breakpoints
+            - customizable widths that determine how your responsive layout behaves across devices
+            - e.g. breakpoints with container
+                .container, which sets a max-width at each responsive breakpoint
+                .container-fluid, which is width: 100% at all breakpoints
+                .container-{breakpoint}, which is width: 100% until the specified breakpoint
+        
+        4. Utilities
+            - text 
+                text-{breakpoint}-start, text-{breakpoint}-center, text-{breakpoint}-end
+            - color e.g. text-white
+            - background e.g. bg-primary
+            - border 
+                border, border-top, border-bottom, border-start, border-end
+            - spacing
+                m{side}-{size}
+                p{side}-{size}
+                    where   side: t, b, s, e, x, y, blank
+                            size: 0 - 5, auto
+            - sizing
+                w-25, w-50, w-75, w-100, w-auto
+                h-25, h-50, h-75, h-100, h-auto
+            -display
+                d-inline, d-block, d-inline-block
+            - position
+                e.g. position-absolute top-50 start-50
+
+        5. Image
+            Floating an image around text: float-start, float-end, clearfix
+            Centering an image: mx-auto d-block
+
+        6. Components
+            - many examples
+     -->
+
+     <style>
+        .box {
+            width: 400px;
+            height: 400px;
+            background-color: rgb(66, 184, 11);
+        }
+
+        .small-box {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(142, 24, 197);
+        }
+     </style>
+</head>
+<body>
+    
+    <!-- 
+        Responsive containers allow you to specify a class that is 100% wide 
+        until the specified breakpoint is reached, after which we apply max-widths 
+        for each of the higher breakpoints. 
+        For example, .container-sm occupies 100% wide 
+        until the sm breakpoint is reached, where it will scale up with md, lg, xl, and xxl.
+    -->
+    <div class="container-md">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti porro deserunt architecto id, ipsum rem vel dolore voluptates eum? Impedit deserunt et maiores, in animi molestias reprehenderit cum consectetur nesciunt!</div>
+   
+    <hr>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus sunt, debitis quam culpa doloremque quidem ducimus. Ipsa, aliquam iure aperiam laudantium, excepturi ipsam quas accusamus quisquam tempora nemo atque labore?</div>
+
+            <div class="col-md-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus sunt, debitis quam culpa doloremque quidem ducimus. Ipsa, aliquam iure aperiam laudantium, excepturi ipsam quas accusamus quisquam tempora nemo atque labore?</div>
+    
+            <div class="col-md-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus sunt, debitis quam culpa doloremque quidem ducimus. Ipsa, aliquam iure aperiam laudantium, excepturi ipsam quas accusamus quisquam tempora nemo atque labore?</div>
+    
+            <div class="col-md-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus sunt, debitis quam culpa doloremque quidem ducimus. Ipsa, aliquam iure aperiam laudantium, excepturi ipsam quas accusamus quisquam tempora nemo atque labore?</div>
+        </div>
+    </div>
+    <hr>
+
+    <!-- align contents when the contents occupy < 12 columns-->
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-3">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</div>
+
+            <div class="col-3">Iure ullam molestias labore aliquid placeat amet.</div>
+        </div>
+    </div>
+    <hr>
+
+    <hr>
+    <!-- Utilities: text, color, background, border -->
+    <div class="container-fluid text-md-center py-md-2 text-primary">
+        <!-- text center and padding for viewport size medium or larger -->
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+    </div>
+    <hr>
+
+    <!-- Utilities: size, spacing, background, display, border -->
+    <div class="box ps-5 pt-5">
+        <!-- note: can't width and height on an inline element. hence, d-inline-block is used -->
+        <div class="w-25 h-50 mx-2 bg-info d-inline-block border border-dark rounded-3">Width 25% Height 50%</div>
+        <div class="w-25 h-75 mx-2 bg-info d-inline-block border-start border-dark">Width 25% Height 75%</div>
+    </div>
+    <hr>
+
+    <!-- Floating an image around text-->
+    <div class="container-fluid">
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+            <img src="../example/img/emo.png" class="img-fluid float-end" alt="">
+            Eveniet quia impedit distinctio officia id cumque optio facere omnis, veritatis doloribus, iure natus molestias ex incidunt iusto deserunt vitae laborum consequatur.
+        </p>
+        <div class="clearfix"></div> 
+    </div>
+    <hr>
+    
+    <!-- centering an image -->
+    <img src="../example/img/emo2.png" class="img-fluid d-block mx-auto" alt="">
+    <hr>
+    <div class="container-fluid text-center">
+        <img src="../example/img/emo2.png" alt="">
+        <span>center</span>
+        <!-- <div class="small-box mx-auto"></div> -->
+    </div>
+    <hr>
+
+    <!-- Absolute center with position -->
+    <div class="position-relative box">
+        <!-- <p class="position-absolute top-50 start-50 translate-middle">
+            Center
+        </p> -->
+        <img src="../example/img/emo2.png" 
+            class="position-absolute top-50 start-50 translate-middle" alt="">
+    </div>
+    <hr>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+    crossorigin="anonymous"></script>
+    
+</body>
+</html>

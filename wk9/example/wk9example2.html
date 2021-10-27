@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>V-Model</title>
+    <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> --> 
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <h1> The following demonstrates binding text inputs. </h1>
+    <!-- Binding to Text Input -->
+    <div id="app1">
+        <input v-model="message" placeholder="edit me">
+        <p>Message is: {{ message }}</p>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    message: 'Hello'
+                }
+                
+            }
+        }).mount('#app1')
+    </script>
+
+    <h1> The following demonstrates binding multiline text inputs. </h1>
+    <!-- Multiline Text-->
+    <div id="app2">
+        <span>Multiline message is:</span>
+        <p style="white-space: pre-line;">{{ message }}</p> <br>
+
+        <textarea v-model="message" placeholder="add multiple lines">
+        </textarea>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    message: 'Hello'
+                }
+                
+            }
+        }).mount('#app2')
+    </script>
+
+    <h1> The following demonstrates binding checkbox inputs. </h1>
+    <div id="app3">
+        <!-- check boxes -->
+        <!-- Single checkbox, boolean value:  -->
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">Checked? {{ checked }}</label>
+        <br>
+        <!-- Multiple checkboxes, bound to the same Array: -->
+        <input type="checkbox" id="jack" name="name[]" value="Jack" v-model="checkedNames">
+        <label for="jack">Jack Johnson</label>
+        <input type="checkbox" id="john" name="name"  value="John" v-model="checkedNames">
+        <label for="john">John Jackson</label>
+        <input type="checkbox" id="mike" name="name" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike Jackson</label>
+        <br>
+        <span>Checked names: {{ checkedNames }}</span>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    checked: '',
+                    checkedNames: []
+                }
+                
+            }
+        }).mount('#app3')
+    </script>
+
+    <h1> The following demonstrates binding radio button inputs. </h1>
+    <!-- radio buttons-->
+    <div id="app4">
+        <input type="radio" id="none" name="num" v-model="picked">
+        <label for="none">None</label>
+        <br>
+        <input type="radio" id="one" name="num" value="One" v-model="picked">
+        <label for="one">One</label>
+        <br>
+        <input type="radio" id="two" name="num" value="Two" v-model="picked">
+        <label for="two">Two</label>
+        <br>
+        <span>Picked: {{ picked }}</span>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    picked: ''  // can also set an initial value like 'two' 
+                }
+                
+            }
+        }).mount('#app4')
+    </script>
+
+    <h1> The following demonstrates dropdown list inputs. </h1>
+    <!-- select -->
+    <div id="app5">
+        <select v-model="selected">
+            <option disabled value="">Please select one</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <span>Selected: {{ selected }}</span>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    selected: '' // can also set an initial value like 'B'
+                }
+                
+            }
+        }).mount('#app5')
+    </script>
+</body>
+
+</html>

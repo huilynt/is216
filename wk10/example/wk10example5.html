@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product</title>
+    <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> --> 
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="product">
+        <!-- for each item in products, instantiate a product component 
+                also passing product parameters-->
+        <!-- One way to understand this is that the product-element below is replaced its template -->
+        <product
+            v-for="product in products"
+            v-bind:key="product.id"
+            v-bind:prod="product"
+        ></product>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    //assume the following data is obtained dynamically through Asynchronous requests
+                    products: [
+                        { id: 1, name: 'iPhone', desc: '<p>This is the best phone in the world!</p>' }, 
+                        { id: 2, name: 'Samsung', desc: '<p>No, mine is the best!</p>' }, 
+                        { id: 3, name: 'Oppo', desc: '<p>Mine is cheaper and yet as good!</p>' } 
+                    ]
+                }
+            }
+        })
+        // note: template must have a single root element!
+        app.component('product', {
+            props: ['prod'],
+            template: `<div>
+                            <h3> {{ prod.id }} : {{ prod.name }} </h3>
+                            <div v-html='prod.desc'></div>
+                        </div>`
+        })
+
+        app.mount('#product')
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>Shopping Cart</title>
+  </head>
+
+  <body>
+    <h1>Shopping List</h1>
+    <p>Get it done today</p>
+    <input id="userinput" type="text" placeholder="enter items" />
+    <button id="enter" onclick="addList()">Enter</button>
+    <ul id="myul">
+      <li>
+        Notebook
+        <input type="checkbox" />
+      </li>
+      <li>
+        Jello
+        <input type="checkbox" />
+      </li>
+      <li>
+        Spinach
+        <input type="checkbox" />
+      </li>
+      <li>
+        Cake
+        <input type="checkbox" />
+      </li>
+    </ul>
+    <button type="submit" onclick="removeItems()">Remove Items</button>
+    <script>
+      //TODO: complete the three functions; do not change the HTML code above.
+      function addList(e) {
+        let input = document.getElementById("userinput");
+        let item = input.value;
+        if (item.length > 0) {
+          createItem(item);
+          input.value = "";
+        }
+      }
+
+      function createItem(item) {
+        document.getElementById(
+          "myul"
+        ).innerHTML += `<li>${item} <input type="checkbox"></li>`;
+      }
+
+      function removeItems() {
+        let input = document.getElementById("userinput").value;
+        let items = document.getElementById("myul");
+        let children = items.childNodes;
+
+        for (var child of children) {
+          if (child.nodeName == "LI") {
+            if (child.childNodes[1].checked) {
+              items.removeChild(child);
+            }
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

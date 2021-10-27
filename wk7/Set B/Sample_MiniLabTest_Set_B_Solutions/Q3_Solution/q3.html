@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Review - Question 3</title>
+
+    <!-- DO NOT REMOVE THE BELOW LINE -->
+    <script src="axios/axios.min.js"></script>
+
+
+    <!-- DO NOT MODIFY THE BELOW INTERNAL CSS -->
+    <style>
+        .low {
+            background-color: green;
+            color: white;
+        }
+
+        .medium {
+            background-color: yellow;
+            color: black;
+        }
+
+        .high {
+            background-color: orange;
+            color: black
+        }
+
+        .lethal {
+            background-color: red;
+            color: white
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!-- Header 
+         DO NOT MODIFY THIS HTML
+    -->
+    <div>
+        <h1>COVID-19 Count</h1>
+    </div>
+
+
+    <!-- COVID risk color is shown here 
+         DO NOT MODIFY the below <div>'s id and style.
+    -->
+    <div id="risk" style="width: 100px; height: 30px; margin: auto;">
+
+    </div>
+
+    <!-- COVID Statistics are shown here 
+         DO NOT MODIFY the below <div>'s id.
+    -->
+    <div id="stats">
+
+    </div>
+
+    
+
+
+    <!-- JavaScript below -->
+    <script>
+
+        /*
+
+        Mortality Rates
+
+            USA
+            0.0161510%
+
+            Canada
+            0.0172755%
+
+            ---
+
+            Brazil
+            0.0278371%
+
+            Argentina
+            0.0218768%
+
+            ---
+
+            Indonesia
+            0.0336121%
+
+            Japan
+            0.0103089%
+
+            Thailand
+            0.0104196%
+
+            Singapore
+            0.0008638%
+
+            ---
+
+            France
+            0.0166705%
+
+            Spain
+            0.0174320%
+
+            Italy
+            0.0280644%
+
+        */
+
+        var input_country = prompt("Enter a country name (e.g. Singapore, USA, Brazil, etc.)")
+        
+        // DO NOT MODIFY THIS URL
+        var url = "covidapi/count.php"
+
+
+        // Call API endpoint
+        axios.get(url)
+        .then(response => {
+
+            // Response came back
+            // Retrieve only data.statistics
+            // console.log(response)
+            // console.log(response.data.statistics)
+
+            // Students can choose to pass the entire response or response.data as an argument
+            // In solution, we pass only statistics
+            handleData(response.data.statistics);
+
+        })
+        .catch(error => {
+            console.log(error.message)
+        })
+
+
+        // Helper function to perform DOM manipulation
+        function handleData(statistics) {
+            
+            // YOUR CODE GOES HERE
+
+            // console.log(statistics)
+
+            for( region in statistics ) {
+
+                console.log("========= region: " + region + " ==========")
+
+                for( country in statistics[region] ) {
+                    console.log("----- country: " + country + " -----")
+
+                    if( country.toUpperCase() == input_country.toUpperCase() ) {
+
+                        let total_cases = statistics[region][country].total_cases
+                        let total_deaths = statistics[region][country].total_deaths
+                        let mortality_rate = Number(total_deaths) / Number(total_cases)
+                        mortality_rate = mortality_rate.toFixed(7)
+
+                        // Determine <div> class
+                        let risk_class = ''
+                        if( mortality_rate < 0.01 ) {
+                            risk_class = 'low'
+                        }
+                        else if( mortality_rate < 0.02 ) {
+                            risk_class = 'medium'
+                        }
+                        else if( mortality_rate < 0.03 ) {
+                            risk_class = 'high'
+                        }
+                        else {
+                            risk_class = 'lethal'
+                        }
+
+                        let html_str = `
+                            <ul>
+                                <li>Country: ${country}</li>
+                                <li>Total Cases: ${total_cases}</li>
+                                <li>Total Deaths: ${total_deaths}</li>
+                                <li>Mortality Rate: ${mortality_rate}</li>
+                            </ul>
+                        `
+                        
+                        // <div id="stats">
+                        document.getElementById("stats").innerHTML = html_str
+
+                        // <div id="risk">
+                        document.getElementById("risk").classList.add(risk_class)
+
+                        break
+                    }
+
+                }
+            }
+            
+        }
+    </script>
+
+    
+</body>
+</html>
