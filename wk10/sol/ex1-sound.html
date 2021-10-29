@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sound</title>
+    <!-- directly using vue.js -->
+    <!-- for production version, use vue.min.js -->
+    <!-- we shall use development version, includes helpful console warnings -->
+    <!-- <script src="vue.js"></script> --> 
+
+    <!-- using CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app">
+        Sound level
+        <input type="number" min="0" max="3" v-model="soundLevel"> 
+        <sound-icon v-bind:level="soundLevel"></sound-icon>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    soundLevel: 0
+                } 
+            }
+        });
+
+        // its job is to display a sound emoji based on the input 'level'
+        app.component('sound-icon', {
+            data() {
+                return {
+                    soundEmojis: ['🔇', '🔈', '🔉', '🔊']
+                } 
+            },
+            props: ['level'],
+            template: "<span>{{soundEmojis[level]}} </span>"
+            
+        })
+
+        app.mount('#app')
+
+    </script>
+    
+    
+</body>
+</html>

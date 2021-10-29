@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+
+<head>
+    <title>Weather forecast 2-Hourly</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+     <!-- Bootstrap CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+     integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+     crossorigin="anonymous">
+ 
+      <!-- using CDN -->
+      <script src="https://unpkg.com/vue@next"></script>
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+
+</head>
+
+<body>
+
+    <div id='app' class='container'>
+        <div class="row">
+            <div class="col">
+                <weather-menu></weather-menu>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <h2 id="heading"> 2-Hourly dated {{nowDate}} </h2>
+
+
+                <table class="table table-bordered table-striped text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">Area</th>
+                            <th scope='col' v-for='slot of time_slots'>
+                                {{slot}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(details,area) in forecast_details">
+                            <th scope='row'>{{area}}</th>
+                            <td v-for="item of details" :colspan="item.num_slots">
+                                {{item.forecast}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p id="output"></p>
+            </div> <!-- col -->
+        </div> <!-- row -->
+
+    </div>
+
+
+    <script>
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    now: new Date(),
+                    time_slots: [],
+                    forecast_details: {}
+                };
+            }, // data
+
+            computed: {
+                nowDate() {
+                    var nowStr = this.now.toISOString();
+                    return nowStr.slice(0, 10);
+                }
+            }, // computed
+
+
+            created() {
+                axios.get("https://api.data.gov.sg/v1/environment/2-hour-weather-forecast?date="
+                    + encodeURIComponent(this.nowDate))
+                    .then(response => {
+                        var obj = response.data;
+                        this.process(obj);
+
+                    })
+                    .catch(error => {
+                        document.getElementById("output").innerText = 'HTTP Error ' + error.message;
+                    });
+
+            }, // created
+
+            methods: {
+                getTimePart(str) {
+                    return str.slice(11, 16);
+                },
+
+                process(obj) {
+
+                    // convert the response to area - [ forecasts... ]
+                    let area_forecasts = {};
+                    let prev_start = "";
+                    for (item of obj.items) {
+                        var valid_period = item.valid_period;
+
+                        // time intervals for header row
+                        let cur_start = this.getTimePart(valid_period.start);
+                        // there are multiple forecasts at the start time slots
+                        if (cur_start != prev_start) {
+                            this.time_slots.push(cur_start + "-" + this.getTimePart(valid_period.end));
+                        }
+
+                        // convert the response to area - [ forecasts... ]
+                        var forecasts = item.forecasts;
+                        for (forecast of forecasts) {
+                            let area = forecast.area;
+                            if (!area_forecasts.hasOwnProperty(area)) {
+                                area_forecasts[area] = [];
+                            }
+
+                            // there are multiple forecasts at the start time slots
+                            // take the last one
+                            if (cur_start != prev_start) {
+                                area_forecasts[area].push(forecast.forecast);
+                            } else {
+                                let last = area_forecasts[area].length - 1;
+                                area_forecasts[area][last] = forecast.forecast;
+                            }
+                        }
+
+                        // there are multiple forecasts at the start time slots
+                        prev_start = cur_start;
+
+                    }
+
+                    // for each row: location, the forecasts 
+                    let rows = "";
+                    for (area in area_forecasts) {
+                        let details = [];
+
+
+                        let count = 1;
+                        let forecast_arr = area_forecasts[area];
+                        let len = forecast_arr.length;
+                        for (i = 0; i < len; i++) {
+                            let forecast_str = forecast_arr[i];
+
+                            // There are "Partly Cloudy (Day)" and "Partly Cloudy (Night)" 
+                            // but the day and night does not seem correct.
+                            if (forecast_str.includes("Partly Cloudy")) {
+                                forecast_str = "Partly Cloudy";
+                            }
+
+                            if (i == (len - 1) || !forecast_arr[i + 1].includes(forecast_str)) {
+                                details.push({
+                                    num_slots: count,
+                                    forecast: forecast_str
+                                });
+                                count = 1;
+                            } else {
+                                count++;
+                            }
+                        }
+                        this.forecast_details[area] = details;
+                    }
+
+                } // process
+            } // methods
+        });
+
+    </script>
+
+    <script src="weather-menu.js"></script>
+
+    <script>
+        const vm = app.mount('#app');
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+crossorigin="anonymous"></script>
+
+</body>
+
+</html>

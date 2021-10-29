@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+
+<head>
+    <title>Weather forecast - 4 days</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+     <!-- Bootstrap CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+     integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+     crossorigin="anonymous">
+ 
+      <!-- using CDN -->
+      <script src="https://unpkg.com/vue@next"></script>
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+
+</head>
+
+<body>
+
+    <div id='app' class='container'>
+        <div class="row">
+            <div class="col">
+                <weather-menu></weather-menu>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <h2>4-days</h2>
+
+                <table class='table table-bordered table-striped text-center'>
+                    <thead>
+                        <tr>
+                            <th scope="col" rowspan='2'>Date</th>
+                            <th scope="col" rowspan='2'>Forecast</th>
+                            <th scope="col" colspan='2'>Temperature</th>
+                            <th scope="col" colspan='2'>Humid</th>
+                            <th scope="col" colspan='3'>Wind</th>
+                        </tr>
+                        <tr>
+                            <td>Low</td>
+                            <td>High</td>
+                            <td>Low</td>
+                            <td>High</td>
+                            <td>Direction</td>
+                            <td>Low</td>
+                            <td>High</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="forecast of forecasts">
+                            <th scope='row'>{{forecast.date}}</th>
+                            <td>{{forecast.forecast}}</td>
+                            <td>{{forecast.temperature.low}}</td>
+                            <td>{{forecast.temperature.high}}</td>
+                            <td>{{forecast.relative_humidity.low}}</td>
+                            <td>{{forecast.relative_humidity.high}}</td>
+                            <td>{{forecast.wind.direction}}</td>
+                            <td>{{forecast.wind.speed.low}}</td>
+                            <td>{{forecast.wind.speed.high}}</td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+                <p id="output"></p>
+            </div> <!-- col -->
+        </div> <!-- row -->
+
+    </div>
+
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    now: new Date(),
+                    forecasts: []
+                };
+            }, // data
+
+            computed: {
+                nowDate() {
+                    var nowStr = this.now.toISOString();
+                    return nowStr.slice(0, 10);
+                }
+            }, // computed
+
+
+            created() {
+                axios.get("https://api.data.gov.sg/v1/environment/4-day-weather-forecast?date="
+                    + encodeURIComponent(this.nowDate))
+                    .then(response => {
+                        var obj = response.data;
+                        this.process(obj);
+                    }).catch(error => {
+                        document.getElementById("output").innerText = 'HTTP Error ' + error.message;
+                    });
+            }, // created
+
+            methods: {
+                getTimePart(str) {
+                    return str.slice(11, 16);
+                },
+
+                process(obj) {
+
+                    // use the latest update
+                    this.forecasts = obj.items[obj.items.length - 1].forecasts;
+
+
+                } // process
+            } // methods
+        });
+
+
+    </script>
+
+    <script src="weather-menu.js"></script>
+
+    <script>
+        const vm = app.mount('#app');
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+crossorigin="anonymous"></script>
+</body>
+
+</html>

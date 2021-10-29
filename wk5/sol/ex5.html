@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Event Handling</title>
+   
+    <style>
+
+        #square {
+            width: 150px;
+            height: 150px;
+            background-color: goldenrod;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        #circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: goldenrod;
+            text-align: center;
+            padding-top: 60px;
+        }
+    </style>
+</head>
+<body>
+        
+        <div id="circle" onmouseover="mOver(this)" onmouseout="mOut(this)" >
+            Mouse Over Me
+        </div>
+        
+        <script>
+            function mOver(obj) {
+                // obj.getAttributeNode("id").value = "square";
+                obj.id = "square";
+                obj.style.paddingTop = "20px";
+            }
+            
+            function mOut(obj) {
+                // obj.getAttributeNode("id").value = "circle";
+                obj.id = "circle";
+                obj.style.paddingTop = "60px";
+            }
+        </script>
+                
+</body>
+</html>

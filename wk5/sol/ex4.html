@@ -1,0 +1,83 @@
+<html>
+
+<head>
+   <title>Event Handling</title>
+</head>
+
+<body>
+
+   <h1>Shopping List</h1>
+   <p>Get it done today</p>
+   <input id="userinput" onkeypress="addListAfterKeyPress()" type="text" placeholder="enter items">
+   <button id="enter" onclick="addListAfterClick()">Enter</button>
+   <ul id="myul">
+      <li>Notebook
+         <button onclick="remove(this)">delete</button>
+      </li>
+      <li>Jello
+         <button onclick="remove(this)">delete</button>
+      </li>
+      <li>Spinach
+         <button onclick="remove(this)">delete</button>
+      </li>
+      <li>Rice
+         <button onclick="remove(this)">delete</button>
+      </li>
+      <li>Birthday Cake
+         <button onclick="remove(this)">delete</button>
+      </li>
+      <li>Candles
+         <button onclick="remove(this)">delete</button>
+      </li>
+   </ul>
+
+   <script>
+
+      function addListAfterClick() {
+         console.log(event);
+         var input = document.getElementById("userinput");
+         if (input.value.length > 0) {
+            createNewItem(input);
+            input.value = "";
+         }
+      }
+
+      function addListAfterKeyPress() {
+         // keycode reference: 
+         // https://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
+
+         // access the event information
+         console.log(event);
+         // you can check which key is pressed by accessing the keyCode
+         // property of the event
+         console.log(event.keyCode);
+
+         var input = document.getElementById("userinput");
+         // keyCode 13 is the enter key
+         if (input.value.length > 0 && event.keyCode == 13) {
+         // if (input.value.length > 0 && event.key == "Enter") {
+            createNewItem(input);
+            input.value = "";
+         }
+      }
+
+      function createNewItem(item) {
+         var ul = document.getElementsByTagName("ul")[0];
+         var li = document.createElement("li");
+         li.innerHTML = item.value + 
+            " <button onclick='remove(this)'>delete</button>";
+         ul.appendChild(li);
+      }
+
+      function remove(node) {
+         // parentNode of the given element returns  its parent element
+         node2Remove = node.parentNode;
+         node2Remove.remove();
+         // var ul = document.getElementById("myul");
+         // ul.removeChild(obj);
+      }
+   </script>
+
+</body>
+
+</html>

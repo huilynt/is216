@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <title>Add Paragraph</title>
+    </head>
+<body>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div id="div1" class="col-md-4 bg-info mt-4">
+                <p>This is a paragraph.</p>
+                <p>This is another paragraph.</p>
+                <p>This is a new paragraph.</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-2"><button class="btn btn-primary m-2"  onclick="add()">Add a paragraph!</button></div>
+            <div class="col-md-2"><button class="btn btn-primary m-2"  onclick="remove()">Remove a paragraph!</button></div>
+            <div class="col-md-2"><button class="btn btn-primary m-2"  onclick="removeAll()">Remove all paragraphs!</button></div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-4"> 
+                <button class="btn btn-primary m-2"  onclick="addToBody()">Add a paragraph in document body!</button>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-primary m-2"  onclick="removeFromBody()">Remove the paragraph from document body!</button>
+            </div>
+        </div>
+    </div>
+
+  
+    <script>
+        var counter = 1;
+        function add() {
+            var para = document.createElement("p");
+            
+            para.id = "p" + counter; // set id attribute 
+            counter++;
+
+            var node = document.createTextNode("This is a new one.");
+
+            para.appendChild(node);
+            var element = document.getElementById("div1");
+            element.appendChild(para);
+        }
+
+        function remove() {
+            // var e = document.getElementById("div1").lastElementChild;
+            // console.log(e);
+            //document.getElementById("div1").innerHTML = ""
+            document.getElementById("div1").lastElementChild.remove();
+        }
+
+        function removeAll() {    
+           var div1 =  document.getElementById("div1");
+            var children = div1.children;  // -> get all child nodes of div1     
+            var len = children.length;
+            console.log(len);
+            for (let i=0; i<len; i++) {
+                console.log(children[0]);
+                // can't use the index, children[i], since the children array is 
+                // affected as the element is removed      
+                children[0].remove(); 
+            }    
+            //document.getElementById("div1").innerHTML = ""
+        }
+
+        function addToBody() {
+            var para = document.createElement("p");
+            var node = document.createTextNode("This is a new one.");
+            para.appendChild(node);
+            // append the new node into document body
+            var b = document.body; // -> this accesses the whole HTML document body as an element object
+            b.appendChild(para);
+        }
+
+        function removeFromBody() {
+            // console.log(document.body.lastElementChild);
+
+            document.body.lastElementChild.remove();
+        }
+
+    
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+        
+
+</body>
+</html>

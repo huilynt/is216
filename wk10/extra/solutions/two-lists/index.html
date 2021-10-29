@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+
+<head>
+    <title>Two lists</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+    crossorigin="anonymous">
+
+     <!-- using CDN -->
+     <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+
+<body>
+
+    <div id='app' class='container'>
+
+        <div class="row">
+            <div class="col">
+                <!-- 
+                    <two-lists size='5' width="500px" left-title='[left title]' :left-list='list1' right-title='[right title]'
+                    :right-list='list2'></two-lists> 
+                -->
+
+                <h3>Fruits</h3>
+                <two-lists size='5' width="500px" left-title='Likes' :left-list='fruits1'
+                    right-title='Dislikes' :right-list='fruits2'></two-lists>
+
+                <h3>People</h3>
+                <two-lists size='7' width="500px" left-title='Friends' :left-list='personList1'
+                    right-title='Acquaintances' :right-list='personList2'></two-lists>
+
+            </div> <!-- col -->
+        </div> <!-- row -->
+
+    </div>
+
+    <script src='two-lists.js'></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

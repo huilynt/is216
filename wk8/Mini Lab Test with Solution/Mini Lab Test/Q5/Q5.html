@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .night {
+            background-color: black;
+            color: white;
+        }
+
+        .day {
+            background-color: white;
+            color: black;
+        }
+
+        .twilight {
+            background-color: #DBC2CF;
+            color: black
+        }
+
+        .dawn {
+            background-color: #C0A080;
+            color: white
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>Welcome!</h1>
+    </div>
+    <script>        
+        //You can use the following JSON data recevied as a test case for your program
+        var jsonData = '{"coord":{"lon":103.85,"lat":1.29},"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04d"}],"base":"stations","main":{"temp":303.76,"feels_like":307,"temp_min":303.15,"temp_max":304.15,"pressure":1009,"humidity":70},"visibility":10000,"wind":{"speed":4.1,"deg":180},"clouds":{"all":75},"dt":1600402268,"sys":{"type":1,"id":9470,"country":"SG","sunrise":1600383320,"sunset":1600426938},"timezone":28800,"id":1880252,"name":"Singapore","cod":200}';        
+        handleData(jsonData);
+
+        function handleData(jsonData) {
+            var obj = JSON.parse(jsonData); //obj is an object representing the above JSON data 
+            //Your code goes here entirely
+
+
+
+            
+        }
+
+
+    </script>
+</body>
+
+</html>

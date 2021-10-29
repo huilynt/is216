@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+        #div1 {
+            width: 200px;
+            height: 500px;
+            background-color: goldenrod;
+        }
+
+        #div2 {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%; 
+            background-color: goldenrod;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <h2 id="header">Changing HTML Style</h2>
+
+    <button onclick="changeStyle()">Make a change!</button>
+    <div id="div1" style="width: 200px;"></div>
+
+    <script>
+        // variable defined outside functions is a global variable
+        // which is accessible by functions
+        var square = true;
+        var size = 200;
+        var counter = 0;
+        var color = "ff0000";
+        
+        // example of getting CSS properties of an element
+        var d = document.getElementById("div1");
+        var cStyle = getComputedStyle(d)
+        console.log(cStyle)
+        console.log(cStyle.height)
+      
+
+
+        function changeStyle() {
+
+
+            counter++;
+            document.getElementById("header").style.color = "#" + color;
+           
+            if (square) {
+                var div = document.getElementById("div1");
+                div.id = "div2";
+                document.getElementById("div2").style.width = size + "px";
+                document.getElementById("div2").style.height = size + "px";        
+                square = false;
+                color = "000000";
+            } else {
+                var div = document.getElementById("div2");
+                div.id = "div1";
+                document.getElementById("div1").style.width = size + "px";
+                document.getElementById("div1").style.height = size + "px";
+                square = true;
+                color = "ff0000";
+            }
+            size = size - 10;
+            if (counter == 20) {
+                counter = 0;
+                size = 200;
+            }
+                
+            
+        }
+      
+
+    </script>
+
+</body>
+</html>

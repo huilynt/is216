@@ -1,0 +1,75 @@
+<!-- 
+    Do NOT change any of the HTML and CSS code.
+    Only add Javascript code between the <script> tags
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Radio buttons</title>
+
+    <style>
+        .errors {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form action="https://www.w3schools.com/JSREF/event_preventdefault.asp">
+        Gender 
+        <label>
+            <input type="radio" name="gender" value="Male">Male
+        </label>
+        <label>
+            <input type="radio" name="gender" value="Female">Female
+        </label>
+        <button onclick="return doClick()">Button 1</button>
+        <button>Button 2</button>
+    </form>
+
+    <div class="errors">
+        <!-- All your messages are printed here. -->
+    </div>
+
+    <script>
+        // YOUR CODE GOES HERE: START
+
+        // PART A 
+        var genderRadios = document.getElementsByName("gender");
+        var dispErrors = document.getElementsByClassName("errors")[0];
+
+        function doClick() {
+            let results = "Please select a gender";
+            for (genderRadio of genderRadios) {
+                if ( genderRadio.checked) {
+                    results = "You select " + genderRadio.value;
+                }
+            }
+
+            dispErrors.innerText = results;
+            
+            // The following line only works for Part A 
+            // return false;
+
+            /* The following line works for both parts A and B.
+                this cancels the event. useful when 
+                Clicking on a "Submit" button, prevent it from submitting a form
+                Clicking on a link, prevent the link from following the URL
+            */
+            event.preventDefault();
+        }
+
+        // PART B
+        /* 
+            This is to highlight that there are subtle differences 
+            between the 2 ways to add event handlers.             
+        */
+        var btn2 = document.getElementsByTagName("button")[1];
+        btn2.addEventListener("click", doClick);
+
+        // YOUR CODE GOES HERE: END
+    </script>
+</body>
+</html>
